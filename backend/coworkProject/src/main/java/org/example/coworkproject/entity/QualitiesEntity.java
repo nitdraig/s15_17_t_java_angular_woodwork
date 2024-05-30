@@ -12,16 +12,14 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Table(name = "qualities")
 public class QualitiesEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_quality")
-    private Long idQuality;
+    private Long id_quality;
 
-    @Column(name = "nombre")
-    private String nombre;
+    private String QualityName;
+    private boolean isActive;
 
     @JoinTable(
             name = "workspaces_qualities",

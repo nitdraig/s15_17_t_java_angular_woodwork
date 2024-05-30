@@ -24,8 +24,8 @@ public class UserEntity implements UserDetails {
     private String password;
     private String fullName;
 
-    @ManyToMany
-    private List<WorkspaceEntity> workSpaces;
+//    @ManyToMany
+//    private List<WorkspaceEntity> workSpaces;
     private String profilePicture;
 
 

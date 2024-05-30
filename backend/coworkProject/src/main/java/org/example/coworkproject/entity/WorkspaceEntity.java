@@ -10,28 +10,22 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Table(name = "workspaces")
 public class WorkspaceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_workspace")
-    private Long idWorkspace;
+    private Long id_workspace;
 
-    @Column(name = "city")
-    private Integer city;
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable
+    private List<String> days;
 
-    @Column(name = "country")
-    private Integer country;
-
-    @Column(name = "is_public")
-    private Boolean isPublic;
-
-    @Column(name = "address")
+    private String startTime;
+    private String endTime;
+    private String workspaceName;
     private String address;
-
-    @Column(name = "price")
-    private Float price;
+    private Float pricePerHour;
+    private String description;
 
     @ManyToMany(mappedBy = "workspaces")
     @JsonIgnoreProperties("workspaces")
