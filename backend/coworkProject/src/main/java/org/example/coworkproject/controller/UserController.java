@@ -30,7 +30,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{id_user}")
+    @GetMapping("/getUserById/{id_user}")
     public ResponseEntity<UserResponseDTO> findUserById(@PathVariable Long id_user) {
 
         UserResponseDTO userResponseDTO = userService.findUserById(id_user);
@@ -42,7 +42,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/changePassword/{id_user}")
+    @PutMapping("/changeUserPassword/{id_user}")
     public ResponseEntity<UserResponseDTO> changePassword(@RequestParam String password, @PathVariable Long id_user) throws MyException {
 
         UserResponseDTO userResponseDTO = userService.changeUserPassword(id_user, password);
@@ -58,7 +58,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{id_user}")
+    @DeleteMapping("/deleteUser/{id_user}")
     public ResponseEntity<UserResponseDTO> deleteUser(@PathVariable Long id_user) {
 
         UserResponseDTO userResponseDTO = userService.findUserById(id_user);
