@@ -2,7 +2,10 @@ import React from "react";
 
 const AboutSection: React.FC = () => {
   return (
-    <section className="bg-[#A67C52] h-screen w-full py-16" id="about">
+    <section
+      className="bg-[#A67C52] lg:h-screen h-full w-full py-16"
+      id="about"
+    >
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-black font-semibold tracking-wide uppercase">

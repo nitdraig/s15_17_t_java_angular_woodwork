@@ -3,7 +3,7 @@ import { reviews } from "../../../services/ReviewsAPI";
 
 const ReviewSection: React.FC = () => {
   return (
-    <section className="bg-[#A67C52] w-full h-screen py-16">
+    <section className="bg-[#A67C52] w-full lg:h-screen h-full py-16">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-black font-semibold tracking-wide uppercase">
