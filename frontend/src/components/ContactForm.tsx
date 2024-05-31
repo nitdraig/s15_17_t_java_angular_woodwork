@@ -94,7 +94,7 @@ const ContactForm = () => {
             type="submit"
             className="w-full inline-flex items-center justify-center transition duration-150 ease-in-out py-2 px-6 rounded-lg border border-transparent  shadow-sm text-base font-medium text-white bg-[#8DB600] hover:bg-[#A67C52] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#8DB600]"
           >
-            Send Message
+            Enviar mensaje
           </button>
         </div>
       </form>

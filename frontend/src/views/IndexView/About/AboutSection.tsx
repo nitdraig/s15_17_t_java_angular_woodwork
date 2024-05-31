@@ -2,13 +2,16 @@ import React from "react";
 
 const AboutSection: React.FC = () => {
   return (
-    <section className="bg-[#A67C52] h-screen w-full py-16" id="about">
+    <section
+      className="bg-[#A67C52] lg:h-screen h-full w-full py-16"
+      id="about"
+    >
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-black font-semibold tracking-wide uppercase">
             Acerca de Nosotros
           </h2>
-          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-[#556B2F] sm:text-4xl">
+          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
             Estamos comprometidos con la excelencia
           </p>
           <p className="mt-4 max-w-2xl text-xl text-black lg:mx-auto">

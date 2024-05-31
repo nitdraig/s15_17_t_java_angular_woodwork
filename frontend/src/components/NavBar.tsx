@@ -33,7 +33,7 @@ export default function NavBar() {
         </a>
         <a
           href="/#faq"
-          className="text-lg no-underline mt-2 sm:mt-0 ml-2 text-[#262626] hover:text-gray-800 font-bold transition duration-150 ease-in-out"
+          className="text-lg lg:flex hidden  no-underline mt-2 sm:mt-0 ml-2 text-[#262626] hover:text-gray-800 font-bold transition duration-150 ease-in-out"
         >
           Preguntas
         </a>
@@ -45,7 +45,7 @@ export default function NavBar() {
         </a>
         <a
           href="/login"
-          className="mt-2 sm:mt-0 sm:ml-4 w-32 hover:bg-[#556B2F]  bg-[#8DB600] text-white py-2 px-6  text-center font-bold rounded-lg transition duration-150 ease-in-out"
+          className="mt-2 sm:mt-0 ml-4 w-32 hover:bg-[#556B2F]  bg-[#8DB600] text-white py-2 px-6  text-center font-bold rounded-lg transition duration-150 ease-in-out"
         >
           Ingresar
         </a>
