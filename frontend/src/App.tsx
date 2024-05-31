@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import LoginView from "./views/LoginView/LoginView";
 import RegisterView from "./views/RegisterView/RegisterView";
 import Index from "./pages/index/Index";
-import ReservationView from "./views/reservationView/ReservationView";
+import ReservationView from "./views/ReservationView/ReservationView";
 
 function App() {
   return (

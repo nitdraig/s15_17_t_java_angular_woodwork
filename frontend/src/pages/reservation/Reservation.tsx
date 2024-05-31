@@ -1,4 +1,4 @@
-import ReservationView from "../../views/reservationView/ReservationView";
+import ReservationView from "../../views/ReservationView/ReservationView";
 
 const Reservation = () => {
   return (
