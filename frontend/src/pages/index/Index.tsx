@@ -1,10 +1,9 @@
-
-import DashboardView from "../dashboardView/DashboardView";
+import IndexView from "../../views/IndexView/IndexView";
 
 const Index = () => {
   return (
     <>
-      <DashboardView/>
+      <IndexView />
     </>
   );
 };
