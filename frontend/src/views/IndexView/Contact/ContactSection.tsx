@@ -3,7 +3,10 @@ import ContactForm from "../../../components/ContactForm";
 
 const ContactSection: React.FC = () => {
   return (
-    <section className="bg-[#556B2F] w-full lg:h-full h-screen pt-10  pb-10">
+    <section
+      className="bg-[#556B2F] w-full lg:h-full h-screen pt-10 pb-12"
+      id="contact"
+    >
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-black font-semibold tracking-wide uppercase">

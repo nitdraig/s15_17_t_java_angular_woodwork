@@ -8,7 +8,7 @@ const FaqSection: React.FC = () => {
   };
 
   return (
-    <section className="bg-[#556B2F] w-full h-screen py-16">
+    <section className="bg-[#556B2F] w-full h-screen py-16" id="faq">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-black font-semibold tracking-wide uppercase">
