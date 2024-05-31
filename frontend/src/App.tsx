@@ -4,7 +4,8 @@ import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 import LoginView from "./views/LoginView/LoginView";
 import RegisterView from "./views/RegisterView/RegisterView";
-import Index from "./pages/index";
+import Index from "./pages/index/Index";
+import ReservationView from "./views/reservationView/ReservationView";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<LoginView />} />
           <Route path="/register" element={<RegisterView />} />
+          <Route path="/reservation" element={<ReservationView />} />
         </Routes>
         <Footer />
       </Router>
