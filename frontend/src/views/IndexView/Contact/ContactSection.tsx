@@ -12,7 +12,7 @@ const ContactSection: React.FC = () => {
           <h2 className="text-base text-black font-semibold tracking-wide uppercase">
             Contactanos
           </h2>
-          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-[#A67C52] sm:text-4xl">
+          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
             Resolvemos tus dudas
           </p>
           <p className="mt-4 max-w-2xl text-xl text-black lg:mx-auto">

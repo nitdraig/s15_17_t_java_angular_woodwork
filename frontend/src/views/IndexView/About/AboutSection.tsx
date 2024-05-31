@@ -11,7 +11,7 @@ const AboutSection: React.FC = () => {
           <h2 className="text-base text-black font-semibold tracking-wide uppercase">
             Acerca de Nosotros
           </h2>
-          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-[#556B2F] sm:text-4xl">
+          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
             Estamos comprometidos con la excelencia
           </p>
           <p className="mt-4 max-w-2xl text-xl text-black lg:mx-auto">
