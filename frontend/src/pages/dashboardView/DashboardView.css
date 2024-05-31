@@ -1,0 +1,95 @@
+.dashboard {
+    background-color: #2B3E33;
+    color: white;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-button.active {
+    background-color: #45a049;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.badge {
+    background-color: #f1c40f;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card-location,
+.card-price {
+    margin-bottom: 5px;
+}
+
+.card-footer {
+    margin-top: 10px;
+}
+
+.rating {
+    color: #e67e22;
+    font-size: 14px;
+}
