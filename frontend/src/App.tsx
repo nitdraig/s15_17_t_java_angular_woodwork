@@ -4,7 +4,7 @@ import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 import LoginView from "./views/LoginView/LoginView";
 import RegisterView from "./views/RegisterView/RegisterView";
-import Index from "./pages/index";
+import Index from "./pages/index/Index";
 
 function App() {
   return (

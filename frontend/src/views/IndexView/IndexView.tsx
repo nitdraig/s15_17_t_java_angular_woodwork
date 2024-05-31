@@ -1,10 +1,17 @@
-import React from "react";
-import Hero from "./Hero/Hero";
+import HeroSection from "./Hero/HeroSection";
+import About from "./About/AboutSection";
+import FaqSection from "./Faq/FaqSection";
+import ReviewSection from "./Reviews/ReviewSection";
+import ContactSection from "./Contact/ContactSection";
 
 const IndexView = () => {
   return (
     <>
-      <Hero />
+      <HeroSection />
+      <About />
+      <FaqSection />
+      <ReviewSection />
+      <ContactSection />
     </>
   );
 };
