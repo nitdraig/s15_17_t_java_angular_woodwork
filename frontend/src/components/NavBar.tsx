@@ -32,10 +32,10 @@ export default function NavBar() {
           Nosotros
         </a>
         <a
-          href="/#prices"
+          href="/#faq"
           className="text-lg no-underline mt-2 sm:mt-0 ml-2 text-[#262626] hover:text-gray-800 font-bold transition duration-150 ease-in-out"
         >
-          Precios
+          Preguntas
         </a>
         <a
           href="/#contact"
@@ -45,15 +45,9 @@ export default function NavBar() {
         </a>
         <a
           href="/login"
-          className="mt-2 sm:mt-0 sm:ml-4 w-32 bg-[#31543D] hover:bg-[#A67C52] text-white py-2 px-6 rounded-lg text-center font-bold transition duration-150 ease-in-out"
+          className="mt-2 sm:mt-0 sm:ml-4 w-32 hover:bg-[#556B2F]  bg-[#8DB600] text-white py-2 px-6  text-center font-bold rounded-lg transition duration-150 ease-in-out"
         >
           Ingresar
-        </a>
-        <a
-          href="/register"
-          className="mt-2 sm:mt-0 sm:ml-4 w-32 bg-[#31543D] hover:bg-[#A67C52] text-white py-2 px-6 rounded-lg text-center font-bold transition duration-150 ease-in-out"
-        >
-          Registrar
         </a>
       </div>
     </nav>
