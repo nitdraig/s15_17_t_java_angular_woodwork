@@ -1,5 +1,3 @@
-// PaymentModal.jsx
-import React from 'react';
 
 const PaymentModal = ({ isOpen, onClose, peopleCount, hoursCount, daysCount }) => {
   if (!isOpen) return null;
