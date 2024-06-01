@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { FaWifi, FaCoffee, FaSnowflake, FaUsers, FaLock, FaPlug, FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import PaymentModal from '../../components/PaymentModal';
+
 
 const ReservationView = () => {
-  const navigate = useNavigate(); // Instanciamos useNavigate
+  const navigate = useNavigate(); 
 
-  // Estados para los valores de los sliders
   const [peopleCount, setPeopleCount] = useState(4);
   const [hoursCount, setHoursCount] = useState(3);
   const [daysCount, setDaysCount] = useState(2);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const services = [
     { name: 'Wifi', icon: <FaWifi className="text-xl text-zinc-700" /> },
@@ -21,6 +24,14 @@ const ReservationView = () => {
 
   const handleGoBack = () => {
     navigate('/dashboard'); // Navegamos de vuelta a la ruta /dashboard
+  };
+
+  const handleReserveClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -92,7 +103,7 @@ const ReservationView = () => {
         <div className="w-2/6 flex flex-col space-y-4 p-8 bg-[#323E1D] rounded-lg shadow-md">
           <img className="w-full h-32 rounded-lg object-cover shadow-lg" src="src/assets/imgDashboard.png" alt="Small Image" />
           <button
-            type="submit"
+            onClick={handleReserveClick}
             className="w-full bg-[#F9EC34] hover:bg-[#A67C52] focus:ring-4 focus:outline-none focus:ring-[#31543D] font-medium rounded-lg text-sm md:text-lg px-5 py-2.5 text-center shadow-md hover:shadow-lg transition duration-150 ease-in-out"
           >
             Reservar
@@ -113,7 +124,7 @@ const ReservationView = () => {
             <hr className="border-t border-white my-4" />
             <div className="flex justify-between">
               <span className="font-semibold text-white">Total:</span>
-              <span className="text-white">$XXXXX</span>
+              <span className="text-white">${hoursCount * 5000 * daysCount}</span>
             </div>
           </div>
         </div>
@@ -139,7 +150,13 @@ const ReservationView = () => {
         </p>
       </div>
 
-      
+      <PaymentModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        peopleCount={peopleCount}
+        hoursCount={hoursCount}
+        daysCount={daysCount}
+      />
     </>
   );
 };
