@@ -53,7 +53,6 @@ public class RegisterServiceImpl implements RegisterService {
                 .email(requestDTO.getEmail())
                 .password(passwordEncoder.encode(requestDTO.getPassword()))
                 .fullName(requestDTO.getFullName())
-                .profilePicture(requestDTO.getProfilePicture())
                 .build();
 
         userRepository.save(user);
