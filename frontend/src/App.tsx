@@ -4,7 +4,7 @@ import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 import LoginView from "./views/LoginView/LoginView";
 import RegisterView from "./views/RegisterView/RegisterView";
-import Index from "./pages/index/Index";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<LoginView />} />
           <Route path="/register" element={<RegisterView />} />
         </Routes>

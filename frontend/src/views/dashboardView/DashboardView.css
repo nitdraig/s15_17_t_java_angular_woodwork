@@ -1,0 +1,98 @@
+.dashboard-view {
+    background-color: #2D4018;
+    padding: 40px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-bar {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .filters {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .filter-button {
+    background-color: #f0f0f0; /* Color de fondo base */
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Suaviza la transición */
+  border-radius: 10px;
+  }
+  
+  .filter-button:hover {
+    transform: scale(1.1);
+   
+  }
+
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 50px;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer; /* Añadido para indicar que la tarjeta es clickeable */
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05); /* Añadido para un efecto visual al pasar el mouse por encima */
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    padding: 20px;
+  }
+  
+  .tag {
+    background-color: yellow;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+  }
+  
+  .title {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .price {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  .rating {
+    margin-top: 10px;
+  }
+  
