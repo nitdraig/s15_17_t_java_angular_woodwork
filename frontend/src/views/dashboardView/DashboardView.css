@@ -1,98 +1,147 @@
 .dashboard-view {
-    background-color: #2D4018;
-    padding: 40px;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .search-bar {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-  }
-  
-  .filters {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .filter-button {
-    background-color: #f0f0f0; /* Color de fondo base */
+  background-color: #FFF; /* Fondo blanco para todo el dashboard */
+  padding: 40px;
+  max-width: 100%;
+  margin: 0 auto; /* Centra el contenido horizontalmente */
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: #323E1D; /* Fondo diferente para el header */
+  padding: 25px;
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: center; /* Alinea los elementos al centro horizontalmente */
+  width: calc(100% + 80px); /* Para contrarrestar el padding del contenedor padre */
+  margin: -40px; /* Para contrarrestar el padding del contenedor padre */
+  margin-bottom: 20px; /* Añade un margen inferior para separar del contenido siguiente */
+  box-sizing: border-box;
+}
+
+.search-bar {
+  padding: 10px;
+  border-radius: 10px;
   border: none;
-  color: black;
+  width: 100%; /* Usa un porcentaje para que se ajuste automáticamente */
+  max-width: 834px;
+  margin-bottom: 15px; /* Añade un espacio debajo de la barra de búsqueda */
+  text-align: center;
+  background-color: #8DB600;
+  
+}
+
+.filters {
+  display: flex;
+  gap: 20px;
+  justify-content: center; /* Centra los botones horizontalmente */
+  width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+  flex-wrap: wrap; /* Permite que los botones se ajusten a múltiples líneas si es necesario */
+}
+
+.filter-button {
+  background-color: #8DB600;
+  border: none;
+  color: white;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   margin: 4px 2px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Suaviza la transición */
+  transition: background-color 0.3s ease, color 0.3s ease;
   border-radius: 10px;
-  }
-  
-  .filter-button:hover {
-    transform: scale(1.1);
-   
+}
+
+.filter-button:hover {
+  transform: scale(1.1);
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 70px;
+}
+
+.card {
+  background-color: white;
+ 
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+  border-radius: 5px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-image {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.tag {
+  background-color: yellow;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.title {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.description {
+  font-size: 1rem;
+  color: #555;
+}
+
+.price {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.rating {
+  margin-top: 10px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .search-bar {
+      width: 100%;
   }
 
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 50px;
+  .filters {
+      flex-direction: column;
+      align-items: center;
   }
-  
-  .card {
-    background-color: white;
-    border-radius: 40px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer; /* Añadido para indicar que la tarjeta es clickeable */
-    transition: transform 0.2s;
+
+  .filter-button {
+      width: 100%;
+      max-width: 300px;
   }
-  
-  .card:hover {
-    transform: scale(1.05); /* Añadido para un efecto visual al pasar el mouse por encima */
-  }
-  
-  .card-image {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-  }
-  
+}
+
+@media (max-width: 480px) {
   .card-content {
-    padding: 20px;
+      padding: 10px;
   }
-  
-  .tag {
-    background-color: yellow;
-    padding: 5px;
-    border-radius: 3px;
-    font-size: 0.8rem;
+
+  .card {
+      border-radius: 20px;
   }
-  
-  .title {
-    font-size: 1.2rem;
-    margin: 10px 0;
+
+  .search-bar {
+      width: 100%;
+      max-width: none;
   }
-  
-  .description {
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  .price {
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-  
-  .rating {
-    margin-top: 10px;
-  }
-  
+}

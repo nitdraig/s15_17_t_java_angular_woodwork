@@ -10,7 +10,7 @@ const DashboardView = () => {
   return (
     <div className="dashboard-view">
       <div className="header">
-        <input type="text" placeholder="Search" className="search-bar"  />
+        <input type="text" placeholder="" className="search-bar"  />
         <div className="filters">
           <button className="filter-button">Full Nature</button>
           <button className="filter-button">Creativo</button>
@@ -20,6 +20,7 @@ const DashboardView = () => {
           <button className="filter-button">Bar Style</button>
           <button className="filter-button">Público</button>
         </div>
+        
       </div>
         <PlacesCard/>
       

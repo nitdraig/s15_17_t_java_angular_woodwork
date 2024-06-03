@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import LoginView from "./views/LoginView/LoginView";
 import RegisterView from "./views/RegisterView/RegisterView";
 import Dashboard from "./pages/dashboard/Dashboard";
+import IndexView from "./views/IndexView/IndexView";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<IndexView />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<LoginView />} />
           <Route path="/register" element={<RegisterView />} />
         </Routes>
