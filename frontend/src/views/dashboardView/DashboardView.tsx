@@ -1,5 +1,3 @@
-
-
 import './DashboardView.css';
 import PlacesCard from './PlacesCard/PlacesCard';
 
