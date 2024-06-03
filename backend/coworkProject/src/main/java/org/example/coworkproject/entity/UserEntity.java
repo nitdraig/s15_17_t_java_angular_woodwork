@@ -28,6 +28,8 @@ public class UserEntity implements UserDetails {
 //    private List<WorkspaceEntity> workSpaces;
     private String profilePicture;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReservationsEntity> reservations;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
