@@ -104,7 +104,7 @@ const ReservationView = () => {
           <img className="w-full h-32 rounded-lg object-cover shadow-lg" src="src/assets/imgDashboard.png" alt="Small Image" />
           <button
             onClick={handleReserveClick}
-            className="w-full bg-[#F9EC34] hover:bg-[#A67C52] focus:ring-4 focus:outline-none focus:ring-[#31543D] font-medium rounded-lg text-sm md:text-lg px-5 py-2.5 text-center shadow-md hover:shadow-lg transition duration-150 ease-in-out"
+            className="w-full bg-[#F9EC34] hover:bg-[#A67C52] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#31543D] font-medium rounded-lg text-sm md:text-lg px-5 py-2.5 text-center shadow-md hover:shadow-lg transition duration-150 ease-in-out"
           >
             Reservar
           </button>
