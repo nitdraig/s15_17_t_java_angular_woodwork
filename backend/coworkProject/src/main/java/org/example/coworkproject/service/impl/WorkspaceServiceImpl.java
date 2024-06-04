@@ -10,9 +10,8 @@ import org.example.coworkproject.repository.WorkspaceRepository;
 import org.example.coworkproject.service.WorkspaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class WorkspaceServiceImpl implements WorkspaceService {
@@ -96,12 +95,13 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         WorkspaceEntity workspace = workspaceRepository.findById(id_workspace).orElse(null);
 
         workspace.setPricePerHour(updatedWorkspaceRequestDTO.getPricePerHour());
-        workspace.setDays(updatedWorkspaceRequestDTO.getDays());
+        workspace.setOpenDays(updatedWorkspaceRequestDTO.getOpenDays());
         workspace.setAddress(updatedWorkspaceRequestDTO.getAddress());
         workspace.setWorkspaceName(updatedWorkspaceRequestDTO.getWorkspaceName());
         workspace.setDescription(updatedWorkspaceRequestDTO.getDescription());
-        workspace.setStartTime(updatedWorkspaceRequestDTO.getStartTime());
-        workspace.setEndTime(updatedWorkspaceRequestDTO.getEndTime());
+        workspace.setOpeningTime(updatedWorkspaceRequestDTO.getOpeningTime());
+        workspace.setClosingTime(updatedWorkspaceRequestDTO.getClosingTime());
+        workspace.setCapacity(updatedWorkspaceRequestDTO.getCapacity());
 
         workspaceRepository.save(workspace);
 
