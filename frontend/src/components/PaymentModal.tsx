@@ -45,13 +45,13 @@ const PaymentModal = ({ isOpen, onClose, peopleCount, hoursCount, daysCount }) =
               <span className="font-semibold text-gray-700">Total:</span>
               <span className="text-gray-700">${totalAmount}</span>
             </div>
-						<div className="flex justify-center mt-28">
-          <button onClick={onClose} className="px-4 py-2 bg-[#323E1D] text-white rounded-lg mr-2">Cancelar</button>
-          <button className="px-4 py-2 bg-[#F9EC34] hover:bg-[#A67C52] text-black hover:text-white rounded-lg">Confirmar</button>
-        </div>
+            <div className="flex justify-center mt-28">
+              <button onClick={onClose} className="px-4 py-2 bg-[#323E1D] text-white rounded-lg mr-2">Cancelar</button>
+              <button className="px-4 py-2 bg-[#F9EC34] hover:bg-[#A67C52] text-black hover:text-white rounded-lg">Confirmar</button>
+            </div>
           </div>
         </div>
-        
+
       </div>
     </div>
   );

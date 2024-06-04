@@ -3,14 +3,12 @@ import { FaWifi, FaCoffee, FaSnowflake, FaUsers, FaLock, FaPlug, FaArrowLeft } f
 import { useNavigate } from 'react-router-dom';
 import PaymentModal from '../../components/PaymentModal';
 
-
 const ReservationView = () => {
-  const navigate = useNavigate(); 
-
+  const navigate = useNavigate();
+  
   const [peopleCount, setPeopleCount] = useState(4);
   const [hoursCount, setHoursCount] = useState(3);
   const [daysCount, setDaysCount] = useState(2);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const services = [
@@ -23,7 +21,7 @@ const ReservationView = () => {
   ];
 
   const handleGoBack = () => {
-    navigate('/dashboard'); // Navegamos de vuelta a la ruta /dashboard
+    navigate('/dashboard');
   };
 
   const handleReserveClick = () => {
