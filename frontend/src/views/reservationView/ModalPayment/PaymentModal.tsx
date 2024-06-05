@@ -1,6 +1,8 @@
+import { FC } from 'react';
 import { format } from 'date-fns';
+import { PaymentModalProps } from '../../../types/Types';
 
-const PaymentModal = ({ isOpen, onClose, peopleCount, startTime, endTime, selectedDay, pricePerHour}) => {
+const PaymentModal: FC<PaymentModalProps> = ({ isOpen, onClose, peopleCount, startTime, endTime, selectedDay, pricePerHour }) => {
   if (!isOpen) return null;
 
   const formattedStartTime = format(startTime, 'h:mm aa');
@@ -48,16 +50,20 @@ const PaymentModal = ({ isOpen, onClose, peopleCount, startTime, endTime, select
               <span className="font-semibold text-gray-700">Hora de fin:</span>
               <span className="text-gray-700">{formattedEndTime}</span>
             </div>
+            <div className="flex justify-between mb-4">
+              <span className="font-semibold text-gray-700">Precio por Hora x Persona:</span>
+              <span className="text-gray-700">${pricePerHour}</span>
+            </div>
             <hr className="border-t border-gray-300 my-4" />
             <div className="flex justify-between mb-4">
               <span className="font-semibold text-gray-700">Total:</span>
               <span className="text-gray-700">${totalAmount}</span>
             </div>
-            <div className="flex justify-center mt-28">
-              <button onClick={onClose} className="px-4 py-2 bg-[#323E1D] text-white hover:bg-[#cb3234] rounded-lg mr-2">Cancelar</button>
-              <button className="px-4 py-2 bg-[#F9EC34] hover:bg-[#A67C52] text-black hover:text-white rounded-lg">Confirmar</button>
-            </div>
           </div>
+        </div>
+        <div className="flex justify-center mt-4">
+          <button onClick={onClose} className="px-4 py-2 bg-[#323E1D] text-white hover:bg-[#cb3234] rounded-lg mr-2">Cancelar</button>
+          <button className="px-4 py-2 bg-[#F9EC34] hover:bg-[#A67C52] text-black hover:text-white rounded-lg">Confirmar</button>
         </div>
       </div>
     </div>

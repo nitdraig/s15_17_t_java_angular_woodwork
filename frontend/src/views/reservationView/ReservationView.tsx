@@ -9,9 +9,9 @@ const ReservationView = () => {
   const navigate = useNavigate();
 
   const [peopleCount, setPeopleCount] = useState(4);
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
-  const [selectedDay, setSelectedDay] = useState(new Date());
+  const [startTime, setStartTime] = useState<Date | null>(new Date());
+  const [endTime, setEndTime] = useState<Date | null>(new Date());
+  const [selectedDay, setSelectedDay] = useState<Date | null>(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pricePerHour = 5000;
 
@@ -147,7 +147,7 @@ const ReservationView = () => {
           <div className="flex flex-col space-y-2 mt-4">
             <div className="flex justify-between">
               <span className="font-semibold text-white">Día de Reserva:</span>
-              <span className="text-white">{selectedDay.toLocaleDateString()}</span>
+              <span className="text-white">{selectedDay?.toLocaleDateString() ?? 'No seleccionado'}</span>
             </div>
             <div className="flex justify-between">
               <span className="font-semibold text-white">Cantidad de Personas:</span>
@@ -155,11 +155,15 @@ const ReservationView = () => {
             </div>
             <div className="flex justify-between">
               <span className="font-semibold text-white">Hora de Inicio:</span>
-              <span className="text-white">{startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+              <span className="text-white">
+                {startTime ? startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'No seleccionado'}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="font-semibold text-white">Hora de Fin:</span>
-              <span className="text-white">{endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+              <span className="text-white">
+                {endTime ? endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'No seleccionado'}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="font-semibold text-white">Precio por Hora x Persona:</span>
@@ -168,7 +172,9 @@ const ReservationView = () => {
             <hr className="border-t border-white my-4" />
             <div className="flex justify-between">
               <span className="font-semibold text-white">Total:</span>
-              <span className="text-white">${(endTime.getHours() - startTime.getHours()) * pricePerHour * peopleCount}</span>
+              <span className="text-white">
+                {startTime && endTime ? `$${(endTime.getHours() - startTime.getHours()) * pricePerHour * peopleCount}` : 'No disponible'}
+              </span>
             </div>
           </div>
         </div>
@@ -198,9 +204,9 @@ const ReservationView = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         peopleCount={peopleCount}
-        startTime={startTime}
-        endTime={endTime}
-        selectedDay={selectedDay}
+        startTime={startTime!}
+        endTime={endTime!}
+        selectedDay={selectedDay!}
         pricePerHour={pricePerHour}
       />
     </>
