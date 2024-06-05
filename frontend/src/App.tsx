@@ -6,6 +6,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Index from "./pages/index/Index";
 import { Login } from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import EditProfile from "./pages/editProfile/EditProfile";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/editProfile/:id" element={<EditProfile />} />
         </Routes>
         <Footer />
       </Router>
