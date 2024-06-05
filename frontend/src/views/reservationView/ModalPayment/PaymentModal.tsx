@@ -1,8 +1,12 @@
+import { format } from 'date-fns';
 
-const PaymentModal = ({ isOpen, onClose, peopleCount, hoursCount, daysCount }) => {
+const PaymentModal = ({ isOpen, onClose, peopleCount, startTime, endTime, selectedDay, pricePerHour}) => {
   if (!isOpen) return null;
 
-  const totalAmount = hoursCount * 5000 * daysCount;
+  const formattedStartTime = format(startTime, 'h:mm aa');
+  const formattedEndTime = format(endTime, 'h:mm aa');
+  const formattedSelectedDay = format(selectedDay, 'dd/MM/yyyy');
+  const totalAmount = (endTime.getHours() - startTime.getHours()) * pricePerHour * peopleCount;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -33,12 +37,16 @@ const PaymentModal = ({ isOpen, onClose, peopleCount, hoursCount, daysCount }) =
               <span className="text-gray-700">{peopleCount}</span>
             </div>
             <div className="flex justify-between mb-4">
-              <span className="font-semibold text-gray-700">Cantidad de horas:</span>
-              <span className="text-gray-700">{hoursCount}</span>
+              <span className="font-semibold text-gray-700">Día seleccionado:</span>
+              <span className="text-gray-700">{formattedSelectedDay}</span>
             </div>
             <div className="flex justify-between mb-4">
-              <span className="font-semibold text-gray-700">Cantidad de días:</span>
-              <span className="text-gray-700">{daysCount}</span>
+              <span className="font-semibold text-gray-700">Hora de inicio:</span>
+              <span className="text-gray-700">{formattedStartTime}</span>
+            </div>
+            <div className="flex justify-between mb-4">
+              <span className="font-semibold text-gray-700">Hora de fin:</span>
+              <span className="text-gray-700">{formattedEndTime}</span>
             </div>
             <hr className="border-t border-gray-300 my-4" />
             <div className="flex justify-between mb-4">
@@ -46,12 +54,11 @@ const PaymentModal = ({ isOpen, onClose, peopleCount, hoursCount, daysCount }) =
               <span className="text-gray-700">${totalAmount}</span>
             </div>
             <div className="flex justify-center mt-28">
-              <button onClick={onClose} className="px-4 py-2 bg-[#323E1D] text-white rounded-lg mr-2">Cancelar</button>
+              <button onClick={onClose} className="px-4 py-2 bg-[#323E1D] text-white hover:bg-[#cb3234] rounded-lg mr-2">Cancelar</button>
               <button className="px-4 py-2 bg-[#F9EC34] hover:bg-[#A67C52] text-black hover:text-white rounded-lg">Confirmar</button>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
