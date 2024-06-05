@@ -3,6 +3,7 @@ package org.example.coworkproject.service.impl;
 import org.example.coworkproject.dto.request.WorkspaceRequestDTO;
 import org.example.coworkproject.dto.response.WorkspaceResponseDTO;
 import org.example.coworkproject.entity.QualitiesEntity;
+import org.example.coworkproject.entity.ReservationEntity;
 import org.example.coworkproject.entity.WorkspaceEntity;
 import org.example.coworkproject.mapper.WorkspaceMapper;
 import org.example.coworkproject.repository.QualitiesRepository;
@@ -10,9 +11,10 @@ import org.example.coworkproject.repository.WorkspaceRepository;
 import org.example.coworkproject.service.WorkspaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class WorkspaceServiceImpl implements WorkspaceService {
@@ -96,24 +98,41 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         WorkspaceEntity workspace = workspaceRepository.findById(id_workspace).orElse(null);
 
         workspace.setPricePerHour(updatedWorkspaceRequestDTO.getPricePerHour());
-        workspace.setDays(updatedWorkspaceRequestDTO.getDays());
+        workspace.setOpenDays(updatedWorkspaceRequestDTO.getOpenDays());
         workspace.setAddress(updatedWorkspaceRequestDTO.getAddress());
         workspace.setWorkspaceName(updatedWorkspaceRequestDTO.getWorkspaceName());
         workspace.setDescription(updatedWorkspaceRequestDTO.getDescription());
-        workspace.setStartTime(updatedWorkspaceRequestDTO.getStartTime());
-        workspace.setEndTime(updatedWorkspaceRequestDTO.getEndTime());
+        workspace.setOpeningTime(updatedWorkspaceRequestDTO.getOpeningTime());
+        workspace.setClosingTime(updatedWorkspaceRequestDTO.getClosingTime());
+        workspace.setCapacity(updatedWorkspaceRequestDTO.getCapacity());
 
         workspaceRepository.save(workspace);
 
         return workspaceMapper.workspaceToWorkspaceResponseDTO(workspace);
     }
 
+    @Transactional
     @Override
     public WorkspaceResponseDTO deleteWorkspace(Long id_workspace) {
 
         WorkspaceEntity workspace = workspaceRepository.findById(id_workspace).orElse(null);
 
-        workspaceRepository.delete(workspace);
+        if (workspace != null) {
+            // Desasociar todas las reservas relacionadas
+            for (ReservationEntity reservation : workspace.getReservations()) {
+                reservation.setWorkspace(null);
+            }
+            workspace.getReservations().clear();
+
+            // Desasociar de todas las cualidades relacionadas
+            for (QualitiesEntity quality : workspace.getQualities()) {
+                quality.getWorkspaces().remove(workspace);
+            }
+            workspace.getQualities().clear();
+
+            // Eliminar el workspace
+            workspaceRepository.delete(workspace);
+        }
 
         return workspaceMapper.workspaceToWorkspaceResponseDTO(workspace);
     }
