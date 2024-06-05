@@ -1,4 +1,6 @@
 .dashboard-view {
+  display: flex;
+  flex-direction: column;
   background-color: #FFF; /* Fondo blanco para todo el dashboard */
   padding: 40px;
   max-width: 100%;
@@ -19,42 +21,55 @@
 }
 
 .search-bar {
-  padding: 10px;
+  padding: 10px 10px 10px 40px; /* Añadir espacio para el ícono */
   border-radius: 10px;
   border: none;
   width: 100%; /* Usa un porcentaje para que se ajuste automáticamente */
   max-width: 834px;
   margin-bottom: 15px; /* Añade un espacio debajo de la barra de búsqueda */
-  text-align: center;
-  background-color: #8DB600;
-  
+  text-align: left;
+  background-color: #F3E8DB;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNCAxNCI+PHBhdGggZD0iTTEzLjEyOCAxMi4zODlsLTMuMjkzLTMuMjkzYTMuNzUgMy43NSAwIDEgMC0uNzE0LjcxbDMuMjkzIDMuMjkzYTEuMDEyIDEuMDEyIDAgMCAwIDEuNDEyLTEuNDEyem0tMi4yMTMtNS40MzRhNS41IDUuNSAwIDEgMS0xMC41IDAgNS41IDUuNSAwIDAgMSAxMC41IDB6TTcuNSAwQTMuNSAzLjUgMCAxMCA3LjUgNy41IDMuNSAzLjUgMCAwMCA3LjUgMHo2LjA2NiA5LjUyOGwtMy4wOTItMy4wOTFhMS4wMTIgMS4wMTIgMCAwIDAtMS40MTIgMCAuNzUyLjc1MiAwIDAgMCAuNzE0LjcxNGwzLjA5MiAzLjA5MkE1LjUgNS41IDAgMCAwIDEzLjU2NiA2LjUgNS41IDUuNSAwIDAgMCAxMy41NjYgMTIuMDY2eiIvPjwvc3ZnPg==');
+  background-size: 20px 20px;
+  background-position: 10px center;
+  background-repeat: no-repeat;
+}
+
+.filters-carousel {
+  width: 100%;
+  overflow: hidden; /* Oculta los botones que están fuera del área visible */
 }
 
 .filters {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   justify-content: center; /* Centra los botones horizontalmente */
-  width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
-  flex-wrap: wrap; /* Permite que los botones se ajusten a múltiples líneas si es necesario */
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .filter-button {
-  background-color: #8DB600;
+  background: none;
   border: none;
-  color: white;
-  padding: 10px 20px;
+  color: #D9D9D9;
+  font-family: "Share Tech", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1.28px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  margin: 4px 2px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border-radius: 10px;
+  transition: color 0.3s ease;
+  
 }
 
 .filter-button:hover {
-  transform: scale(1.1);
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-decoration-color: yellow;
+  text-underline-offset: 4.5px;
 }
 
 .card-container {
@@ -66,7 +81,6 @@
 
 .card {
   background-color: white;
- 
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -117,31 +131,35 @@
 /* Media Queries */
 @media (max-width: 768px) {
   .search-bar {
-      width: 100%;
+    width: 100%;
+  }
+
+  .filters-carousel {
+    overflow-x: auto; /* Permite desplazamiento horizontal */
   }
 
   .filters {
-      flex-direction: column;
-      align-items: center;
+    flex-wrap: nowrap; /* Evita que los botones se ajusten a múltiples líneas */
+    justify-content: flex-start; /* Alinea los botones al inicio del contenedor */
+    width: max-content; /* Ajusta el ancho al contenido */
   }
 
   .filter-button {
-      width: 100%;
-      max-width: 300px;
+    flex: 0 0 auto; /* Evita que los botones se estiren o se encogen */
   }
 }
 
 @media (max-width: 480px) {
   .card-content {
-      padding: 10px;
+    padding: 10px;
   }
 
   .card {
-      border-radius: 20px;
+    border-radius: 20px;
   }
 
   .search-bar {
-      width: 100%;
-      max-width: none;
+    width: 100%;
+    max-width: none;
   }
 }
