@@ -1,12 +1,15 @@
-
 import './DashboardView.css';
 import PlacesCard from './PlacesCard/PlacesCard';
+import { FaSearch } from 'react-icons/fa';
 
 const DashboardView = () => {
   return (
     <div className="dashboard-view">
       <div className="header">
-        <input type="text" placeholder="" className="search-bar" />
+        <div className="search-bar-container">
+          <input type="text" placeholder="" className="search-bar" />
+          <button className="search-button"><FaSearch /></button>
+        </div>
         <div className="filters-carousel">
           <div className="filters">
             <button className="filter-button">Full Nature</button>
