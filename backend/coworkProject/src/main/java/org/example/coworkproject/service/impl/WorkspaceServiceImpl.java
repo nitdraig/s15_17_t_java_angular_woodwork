@@ -1,10 +1,12 @@
 package org.example.coworkproject.service.impl;
 
+import io.jsonwebtoken.io.IOException;
 import org.example.coworkproject.dto.request.WorkspaceRequestDTO;
 import org.example.coworkproject.dto.response.WorkspaceResponseDTO;
 import org.example.coworkproject.entity.QualitiesEntity;
 import org.example.coworkproject.entity.ReservationEntity;
 import org.example.coworkproject.entity.WorkspaceEntity;
+import org.example.coworkproject.helper.ImageHelper;
 import org.example.coworkproject.mapper.WorkspaceMapper;
 import org.example.coworkproject.repository.QualitiesRepository;
 import org.example.coworkproject.repository.WorkspaceRepository;
@@ -12,6 +14,7 @@ import org.example.coworkproject.service.WorkspaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -27,6 +30,9 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     @Autowired
     private WorkspaceMapper workspaceMapper;
+
+    @Autowired
+    private ImageHelper imageHelper;
 
     @Override
     public List<WorkspaceResponseDTO> getAllWorkspaces() {
@@ -44,13 +50,13 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     }
 
     @Override
-    public WorkspaceResponseDTO addQualityToWorkspace(Long id_workspace, Long id_quality){
+    public WorkspaceResponseDTO addQualityToWorkspace(Long id_workspace, Long id_quality) {
 
         WorkspaceEntity workspace = workspaceRepository.findById(id_workspace).orElse(null);
         QualitiesEntity quality = qualitiesRepository.findById(id_quality).orElse(null);
 
-        if(workspace != null && quality != null) {
-            if (!workspace.getQualities().contains(quality)){
+        if (workspace != null && quality != null) {
+            if (!workspace.getQualities().contains(quality)) {
                 workspace.getQualities().add(quality);
                 quality.getWorkspaces().add(workspace);
                 workspaceRepository.save(workspace);
@@ -84,7 +90,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     }
 
     @Override
-    public WorkspaceResponseDTO createWorkspace(WorkspaceRequestDTO workspaceRequestDTO){
+    public WorkspaceResponseDTO createWorkspace(WorkspaceRequestDTO workspaceRequestDTO) {
 
         WorkspaceEntity workspace = workspaceMapper.workspaceRequestDTOToWorkspace(workspaceRequestDTO);
         WorkspaceEntity createdWorkspace = workspaceRepository.save(workspace);
@@ -105,6 +111,45 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         workspace.setOpeningTime(updatedWorkspaceRequestDTO.getOpeningTime());
         workspace.setClosingTime(updatedWorkspaceRequestDTO.getClosingTime());
         workspace.setCapacity(updatedWorkspaceRequestDTO.getCapacity());
+
+        workspaceRepository.save(workspace);
+
+        return workspaceMapper.workspaceToWorkspaceResponseDTO(workspace);
+    }
+
+    @Override
+    public WorkspaceResponseDTO addImages(Long id_workspace, List<MultipartFile> images) throws IOException {
+
+        WorkspaceEntity workspace = workspaceRepository.findById(id_workspace)
+                .orElseThrow(() -> new RuntimeException("Workspace not found"));
+
+        for (MultipartFile image : images) {
+            try {
+                String imageUrl = imageHelper.save(image);
+                workspace.getWorkspaceImages().add(imageUrl);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to upload image", e);
+            }
+        }
+
+        workspaceRepository.save(workspace);
+
+        return workspaceMapper.workspaceToWorkspaceResponseDTO(workspace);
+    }
+
+
+    @Override
+    public WorkspaceResponseDTO addMainImage(Long id_workspace, MultipartFile mainImage) throws IOException {
+
+        WorkspaceEntity workspace = workspaceRepository.findById(id_workspace)
+                .orElseThrow(() -> new RuntimeException("Workspace not found"));
+
+        try {
+            String imageUrl = imageHelper.save(mainImage);
+            workspace.setMainImage(imageUrl);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload image", e);
+        }
 
         workspaceRepository.save(workspace);
 
@@ -137,3 +182,4 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         return workspaceMapper.workspaceToWorkspaceResponseDTO(workspace);
     }
 }
+
