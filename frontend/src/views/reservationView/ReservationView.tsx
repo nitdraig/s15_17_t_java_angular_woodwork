@@ -3,11 +3,11 @@ import { FaWifi, FaCoffee, FaSnowflake, FaUsers, FaLock, FaPlug, FaArrowLeft } f
 import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
-import PaymentModal from './ModalPayment/PaymentModal';
 import Imagen1 from '../../assets/imgDashboard.png';
 import Imagen2 from '../../assets/imgDashboard.png';
 import Imagen3 from '../../assets/imgDashboard.png';
 import Imagen4 from '../../assets/imgDashboard.png';
+import PaymentModal from './ModalPayment/PaymentModal';
 
 const ReservationView = () => {
   const navigate = useNavigate();
