@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/v1/api/workspace")
+@RequestMapping(value = "v1/api/workspace")
 public class WorkspaceController {
 
     @Autowired
@@ -82,6 +83,31 @@ public class WorkspaceController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
+    }
+
+    @PostMapping("/addImages/{id_workspace}")
+    public ResponseEntity<WorkspaceResponseDTO> addImages(
+            @PathVariable Long id_workspace,
+            @RequestParam List<MultipartFile> images) {
+        try {
+            WorkspaceResponseDTO updatedWorkspace = workspaceService.addImages(id_workspace, images);
+            return ResponseEntity.ok(updatedWorkspace);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
+
+    @PostMapping("/addMainImage/{id_workspace}")
+    public ResponseEntity<WorkspaceResponseDTO> addMainImage(
+            @PathVariable Long id_workspace, @RequestParam MultipartFile mainImage) {
+
+        try {
+            WorkspaceResponseDTO updatedWorkspace = workspaceService.addMainImage(id_workspace, mainImage);
+            return ResponseEntity.ok(updatedWorkspace);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(null);
+        }
+
     }
 
     @DeleteMapping("/deleteWorkspace/{id_workspace}")
