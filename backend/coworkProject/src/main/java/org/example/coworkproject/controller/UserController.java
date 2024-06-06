@@ -1,6 +1,8 @@
 package org.example.coworkproject.controller;
 
+import io.jsonwebtoken.io.IOException;
 import org.example.coworkproject.dto.response.UserResponseDTO;
+import org.example.coworkproject.entity.UserEntity;
 import org.example.coworkproject.exception.ExceptionMethods;
 import org.example.coworkproject.exception.MyException;
 import org.example.coworkproject.service.UserService;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -55,6 +58,19 @@ public class UserController {
             } else {
                 return ResponseEntity.status(HttpStatus.OK).body(userResponseDTO);
             }
+        }
+    }
+
+    @PutMapping("/updateUser/{id_user}")
+    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id_user, @RequestParam String fullName, @RequestParam MultipartFile profilePicture) {
+
+        try {
+            UserResponseDTO updatedUser = userService.updateUser(id_user, fullName, profilePicture);
+            return ResponseEntity.ok(updatedUser);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body(null);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(null);
         }
     }
 
