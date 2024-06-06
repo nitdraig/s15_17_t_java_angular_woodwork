@@ -16,13 +16,13 @@ import java.util.Map;
 @Component
 public class CloudinaryHelper {
     private Cloudinary cloudinary;
-    @Value("${api.cloudinary.name}")
+    @Value("${CLOUDINARY_NAME}")
     private String cloudName;
 
-    @Value("${api.cloudinary.api-key}")
+    @Value("${CLOUDINARY_API_KEY}")
     private String apiKey;
 
-    @Value("${api.cloudinary.api-secret}")
+    @Value("${CLOUDINARY_API_SECRET}")
     private String apiSecret;
 
 

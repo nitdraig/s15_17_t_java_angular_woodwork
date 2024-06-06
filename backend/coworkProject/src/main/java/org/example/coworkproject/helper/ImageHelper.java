@@ -20,22 +20,20 @@ public class ImageHelper  {
     private final ImageRepository imageRepository;
 
 
-    public Image save(MultipartFile mpf) throws IOException {
-        BufferedImage bufferedImage = ImageIO.read(mpf.getInputStream());
-        if(bufferedImage != null){
-            Map result = cloudinaryHelper.upload(mpf);
-            Image image = new Image();
-            image.builder()
-                    .name((String) result.get("original_filename"))
-                    .imageUrl((String) result.get("url"))
-                    .cloudinaryId((String) result.get("public_id"))
-                    .build();
-
-            imageRepository.save(image);
-
-            return image;
+    public String save(MultipartFile mpf){
+        if(isImageNotNull(mpf)){
+            try {
+                BufferedImage bufferedImage = ImageIO.read(mpf.getInputStream());
+                Map result = cloudinaryHelper.upload(mpf);
+                return result.get("url").toString();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            //TODO: retornar una imagen por defecto
+            return "No hay imagen disponible";
         }
-        return null;
+
     }
 
     public void remove(Long id) throws IOException {
@@ -45,5 +43,9 @@ public class ImageHelper  {
         }
         cloudinaryHelper.delete(image.getCloudinaryId());
         imageRepository.deleteById(id);
+    }
+
+    private boolean isImageNotNull(MultipartFile mpf) {
+        return mpf != null && !mpf.isEmpty();
     }
 }

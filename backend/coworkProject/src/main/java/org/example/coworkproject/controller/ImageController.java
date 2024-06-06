@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/images")
+@RequestMapping("v1/api/images")
 public class ImageController {
 
     private final ImageHelper imageHelper;
@@ -22,11 +22,10 @@ public class ImageController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadImage(@RequestParam MultipartFile image) throws IOException {
-        if(imageHelper.save(image) != null) {
-            return ResponseEntity.ok("Imagen guardada exitosamente");
+    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile mpf) throws IOException {
+        if(mpf.isEmpty()){
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.badRequest().body("No se pudo subir la imagen");
+        return ResponseEntity.ok(imageHelper.save(mpf));
     }
-
 }
