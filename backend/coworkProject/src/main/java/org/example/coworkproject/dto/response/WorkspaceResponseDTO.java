@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -21,5 +22,7 @@ public class WorkspaceResponseDTO {
     private double pricePerHour;
     private String description;
     private int capacity;
+    private List<String> workspaceImages;
+    private String mainImage;
 
 }
