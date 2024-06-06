@@ -1,8 +1,6 @@
 package org.example.coworkproject.helper;
 
 import lombok.AllArgsConstructor;
-import org.example.coworkproject.entity.Image;
-import org.example.coworkproject.repository.ImageRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,8 +14,6 @@ import java.util.Map;
 public class ImageHelper  {
 
     private final CloudinaryHelper cloudinaryHelper;
-
-    private final ImageRepository imageRepository;
 
 
     public String save(MultipartFile mpf){
@@ -36,14 +32,6 @@ public class ImageHelper  {
 
     }
 
-    public void remove(Long id) throws IOException {
-        Image image = imageRepository.findById(id).get();
-        if(image == null){
-            return;
-        }
-        cloudinaryHelper.delete(image.getCloudinaryId());
-        imageRepository.deleteById(id);
-    }
 
     private boolean isImageNotNull(MultipartFile mpf) {
         return mpf != null && !mpf.isEmpty();
