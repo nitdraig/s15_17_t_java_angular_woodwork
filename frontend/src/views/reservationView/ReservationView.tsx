@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import PaymentModal from './ModalPayment/PaymentModal';
+import Imagen1 from '../../assets/imgDashboard.png';
+import Imagen2 from '../../assets/imgDashboard.png';
+import Imagen3 from '../../assets/imgDashboard.png';
+import Imagen4 from '../../assets/imgDashboard.png';
 
 const ReservationView = () => {
   const navigate = useNavigate();
@@ -52,11 +56,11 @@ const ReservationView = () => {
 
       <div className="flex px-16 mb-8">
         <div className="w-4/6 flex items-stretch pr-5">
-          <img className="w-full h-86 rounded-lg object-cover shadow-lg" src="src/assets/imgDashboard.png" alt="Work Together" />
+          <img className="w-full h-86 rounded-lg object-cover shadow-lg" src={Imagen1} alt="Work Together" />
         </div>
         <div className="w-2/6 flex flex-col justify-between space-y-4">
-          <img className="w-full h-43 rounded-lg object-cover shadow-lg" src="src/assets/imgDashboard.png" alt="Work Together" />
-          <img className="w-full h-43 rounded-lg object-cover shadow-lg" src="src/assets/imgDashboard.png" alt="Work Together" />
+          <img className="w-full h-43 rounded-lg object-cover shadow-lg" src={Imagen2} alt="Work Together" />
+          <img className="w-full h-43 rounded-lg object-cover shadow-lg" src={Imagen3} alt="Work Together" />
         </div>
       </div>
 
@@ -137,7 +141,7 @@ const ReservationView = () => {
         </div>
 
         <div className="w-2/6 flex flex-col space-y-6 p-8 mb-10 bg-[#323E1D] rounded-lg shadow-md">
-          <img className="w-full h-44 mt-2 rounded-lg object-cover shadow-lg" src="src/assets/imgDashboard.png" alt="Small Image" />
+          <img className="w-full h-44 mt-2 rounded-lg object-cover shadow-lg" src={Imagen4} alt="Small Image" />
           <button
             onClick={handleReserveClick}
             className="w-full bg-[#F9EC34] hover:bg-[#A67C52] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#31543D] font-medium rounded-lg text-sm md:text-lg px-5 py-2.5 text-center shadow-md hover:shadow-lg transition duration-150 ease-in-out"
