@@ -1,14 +1,23 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IRegisterFormInput } from '../../../types/Types';
+import useAuth from '../../../services/Api';
+import { useNavigate } from 'react-router-dom';
 
 export const RegisterForm: React.FC = () => {
   const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm<IRegisterFormInput>({ mode: 'onChange' });
-
+  const { register: registerUser } = useAuth();
+  const navigate = useNavigate();
   const password = watch("password", "");
 
-  const onSubmit: SubmitHandler<IRegisterFormInput> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IRegisterFormInput> = async (data) => {
+    try {
+      await registerUser(data.email, data.password, data.fullName);
+      console.log("Registro exitoso");
+      navigate('/login');
+    } catch (error) {
+      console.error("Error en el registro:", error);
+    }
   };
 
   return (
