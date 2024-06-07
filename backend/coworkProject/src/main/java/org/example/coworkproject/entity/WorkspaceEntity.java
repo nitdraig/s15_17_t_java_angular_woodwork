@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @Entity
 @Getter
@@ -27,6 +28,10 @@ public class WorkspaceEntity {
     private double pricePerHour;
     private String description;
     private int capacity;
+    private String mainImage;
+
+    @ElementCollection
+    private List<String> workspaceImages;
 
     @ElementCollection
     @Enumerated(EnumType.STRING)

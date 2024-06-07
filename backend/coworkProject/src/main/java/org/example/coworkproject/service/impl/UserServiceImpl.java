@@ -3,12 +3,14 @@ package org.example.coworkproject.service.impl;
 import org.example.coworkproject.dto.response.UserResponseDTO;
 import org.example.coworkproject.entity.UserEntity;
 import org.example.coworkproject.exception.MyException;
+import org.example.coworkproject.helper.ImageHelper;
 import org.example.coworkproject.mapper.UserMapper;
 import org.example.coworkproject.repository.UserRepository;
 import org.example.coworkproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,6 +23,9 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private ImageHelper imageHelper;
+
 
     @Override
     public UserResponseDTO changeUserPassword(Long id_user, String password) throws MyException {
@@ -64,6 +69,25 @@ public class UserServiceImpl implements UserService {
             System.out.println("It wasn't possible to find a user with the ID: " + id_user);
             return null;
         }
+    }
+
+    @Override
+    public UserResponseDTO updateUser(Long id_user, String fullName, MultipartFile profilePicture) {
+
+        UserEntity user = userRepository.findById(id_user).orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (fullName != null && !fullName.isEmpty()) {
+            user.setFullName(fullName);
+        }
+
+        if (profilePicture != null && !profilePicture.isEmpty()) {
+            String photoUrl = imageHelper.save(profilePicture);
+            user.setProfilePicture(photoUrl);
+        }
+
+        userRepository.save(user);
+
+        return userMapper.userToUserResponseDTO(user);
     }
 
 
