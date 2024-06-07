@@ -45,7 +45,8 @@ public class SecurityConfig {
                 // Esto cambia según los endpoints que usemos nosotros
                 new AntPathRequestMatcher("/v1/api/auth/*"),
                 new AntPathRequestMatcher("/swagger-ui/**"),
-                new AntPathRequestMatcher("/v3/api-docs/**")
+                new AntPathRequestMatcher("/v3/api-docs/**"),
+                new AntPathRequestMatcher("/v1/api/render/*")
         );
     }
 
