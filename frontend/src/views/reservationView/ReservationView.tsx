@@ -73,21 +73,21 @@ const ReservationView = () => {
             <div className="text-zinc-900 text-3xl md:text-6xl font-bold font-sans tracking-wider">Work Together</div>
             <div className="text-zinc-500 text-xl md:text-3xl font-normal font-['Montserrat'] tracking-wider">Tagle 3000</div>
             <div className="w-full md:w-100 h-28 mt-4 flex-shrink-0 bg-[#848B77] opacity-80 rounded-[10px] mb-6 flex justify-around items-center">
-              <div className="text-center text-[#000000] font-kanit font-bold text-[14px] md:text-[16px] leading-normal tracking-[0.64px]">
+              <div className="text-center text-[#000000] font-kanit font-bold text-[12px] md:text-[16px] leading-normal tracking-[0.64px]">
                 Favorito entre<br />los freelancers
               </div>
-              <div className="w-[120px] md:w-[186px] text-center text-[#000000] font-kanit font-bold text-[14px] md:text-[16px] leading-normal tracking-[0.64px]">
+              <div className="w-[120px] md:w-[186px] text-center text-[#000000] font-kanit font-bold text-[12px] md:text-[16px] leading-normal tracking-[0.64px]">
                 Uno de los mejores<br />CoWorks del mes
               </div>
               <div className=" fill-[#F9EC34] flex flex-col items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="49" height="47" viewBox="0 0 49 47" fill="none">
                   <path d="M24.4988 39.3747L12.6227 46.5599C12.098 46.8952 11.5495 47.0389 10.9772 46.991C10.4048 46.9431 9.90404 46.7515 9.47478 46.4162C9.04552 46.0809 8.71166 45.6622 8.47318 45.1602C8.2347 44.6582 8.18701 44.0949 8.33009 43.4703L11.478 29.8903L0.961181 20.7651C0.484228 20.334 0.18661 19.8426 0.0683257 19.2907C-0.0499585 18.7389 -0.0146642 18.2005 0.174209 17.6755C0.36499 17.1486 0.651161 16.7175 1.03272 16.3822C1.41429 16.0469 1.93893 15.8313 2.60667 15.7355L16.486 14.514L21.8517 1.72444C22.0902 1.14963 22.4603 0.718517 22.962 0.43111C23.4638 0.143703 23.976 0 24.4988 0C25.0234 0 25.5357 0.143703 26.0355 0.43111C26.5354 0.718517 26.9055 1.14963 27.1459 1.72444L32.5116 14.514L46.3909 15.7355C47.0586 15.8313 47.5833 16.0469 47.9648 16.3822C48.3464 16.7175 48.6326 17.1486 48.8234 17.6755C49.0141 18.2024 49.0504 18.7418 48.9321 19.2936C48.8138 19.8454 48.5152 20.336 48.0364 20.7651L37.5196 29.8903L40.6675 43.4703C40.8106 44.093 40.7629 44.6563 40.5244 45.1602C40.2859 45.6642 39.952 46.0828 39.5228 46.4162C39.0935 46.7515 38.5927 46.9431 38.0204 46.991C37.448 47.0389 36.8995 46.8952 36.3749 46.5599L24.4988 39.3747Z" fill="#F9EC34" />
                 </svg>
-                <div className="text-[#000000] font-kanit font-bold text-[14px] md:text-[16px] leading-normal tracking-[0.64px]">
+                <div className="text-[#000000] font-kanit font-bold text-[12px] md:text-[16px] leading-normal tracking-[0.64px]">
                   4.89
                 </div>
               </div>
-              <div className="text-[#000000] font-kanit font-bold text-[14px] md:text-[16px] leading-normal tracking-[0.64px]">
+              <div className="text-[#000000] font-kanit font-bold text-[12px] md:text-[16px] leading-normal tracking-[0.64px]">
                 Opiniones
               </div>
             </div>
@@ -105,7 +105,7 @@ const ReservationView = () => {
                   max="50"
                   value={peopleCount}
                   onChange={(e) => setPeopleCount(Number(e.target.value))}
-                  className="w-full h-8 items-center p-2  bg-gray-200 rounded-lg cursor-pointer"
+                  className="w-3/6 h-8 items-center p-2  bg-gray-200 rounded-lg cursor-pointer"
                 />
               </div>
               <div className="flex items-center space-x-4">
@@ -135,7 +135,7 @@ const ReservationView = () => {
                 />
               </div>
             </div>
-            <div>
+            <div className="flex justify-center">
               <DatePicker
                 selected={selectedDay}
                 onChange={(date) => setSelectedDay(date)}
@@ -192,9 +192,9 @@ const ReservationView = () => {
       </div>
 
       {/* SERVICIOS */}
-      <div className="px-4 md:px-16 mt-12 mb-8">
-        <h2 className="text-zinc-900 text-4xl font-bold font-sans tracking-wider mb-4">Servicios Disponibles</h2>
-        <div className="grid grid-cols-2 gap-4">
+      <div className="px-7 md:px-16 md:mt-8 mb-8">
+        <h2 className="text-zinc-900 text-4xl font-bold font-sans tracking-wider mb-6 md:mb-4">Servicios Disponibles</h2>
+        <div className="grid grid-cols-2 gap-4 ">
           {services.map((service, index) => (
             <div key={index} className="flex items-center space-x-2">
               {service.icon}
@@ -208,7 +208,7 @@ const ReservationView = () => {
       {/* DESCRIPTION */}
       <div className="px-4 md:px-16 mb-8">
         <h2 className="text-zinc-900 text-4xl font-bold font-sans tracking-wider mb-4">Descripción del coworking</h2>
-        <p className="text-zinc-700 text-xl">
+        <p className="text-zinc-700 text-medium md:text-xl px-2 md:px-0">
           Nuestro espacio de coworking en Tagle 3000 ofrece un ambiente moderno y cómodo para trabajar. Equipado con conexión Wi-Fi de alta velocidad, aire acondicionado para mantenerte fresco y café ilimitado para mantenerte despierto. Contamos con espacios públicos y privados, adaptados a tus necesidades, y tomacorrientes disponibles en todas las áreas. Ideal para trabajar en equipo o de manera individual, asegurando una experiencia productiva y agradable.
         </p>
       </div>
