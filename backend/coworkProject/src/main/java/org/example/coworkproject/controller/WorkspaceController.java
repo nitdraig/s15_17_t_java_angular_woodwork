@@ -88,7 +88,7 @@ public class WorkspaceController {
     @PostMapping("/addImages/{id_workspace}")
     public ResponseEntity<WorkspaceResponseDTO> addImages(
             @PathVariable Long id_workspace,
-            @RequestParam List<MultipartFile> images) {
+            @RequestParam("images") List<MultipartFile> images) {
         try {
             WorkspaceResponseDTO updatedWorkspace = workspaceService.addImages(id_workspace, images);
             return ResponseEntity.ok(updatedWorkspace);
@@ -99,7 +99,7 @@ public class WorkspaceController {
 
     @PostMapping("/addMainImage/{id_workspace}")
     public ResponseEntity<WorkspaceResponseDTO> addMainImage(
-            @PathVariable Long id_workspace, @RequestParam MultipartFile mainImage) {
+            @PathVariable Long id_workspace, @RequestParam("mainImage") MultipartFile mainImage) {
 
         try {
             WorkspaceResponseDTO updatedWorkspace = workspaceService.addMainImage(id_workspace, mainImage);
