@@ -58,6 +58,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       localStorage.setItem("token", accessToken);
     } catch (error) {
       console.error("Failed to login", error);
+      throw error;
     }
   };
 
@@ -79,6 +80,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       }
     } catch (error) {
       console.error("Failed to register", error);
+      throw error;
     }
   };
 

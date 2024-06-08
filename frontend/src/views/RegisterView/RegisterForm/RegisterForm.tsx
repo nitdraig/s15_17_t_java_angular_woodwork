@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IRegisterFormInput } from '../../../types/Types';
 import useAuth from '../../../services/Api';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Spinner from '../../../components/Spinner';
+
 
 export const RegisterForm: React.FC = () => {
   const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm<IRegisterFormInput>({ mode: 'onChange' });
   const { register: registerUser } = useAuth();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const password = watch("password", "");
 
   const onSubmit: SubmitHandler<IRegisterFormInput> = async (data) => {
+    setIsLoading(true);
     try {
       await registerUser(data.email, data.password, data.fullName);
-      console.log("Registro exitoso");
+      toast.success("Registro exitoso");
       navigate('/login');
-    } catch (error) {
-      console.error("Error en el registro:", error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error("Error en el registro: " + error.message);
+      } else {
+        console.error("Error inesperado:", error);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -84,13 +95,13 @@ export const RegisterForm: React.FC = () => {
         {errors.confirmPassword && <p className="mt-2 text-sm text-red-600">{errors.confirmPassword.message}</p>}
       </div>
 
-      <div className="mt-16">
+      <div className="mt-16 text-center">
         <button
           type="submit"
           className="cursor-pointer w-full text-white bg-[#31543D] hover:bg-[#A67C52] focus:ring-4 focus:outline-none focus:ring-[#31543D] font-medium rounded-lg text-sm md:text-lg px-5 py-2.5 text-center shadow-md hover:shadow-lg transition duration-150 ease-in-out"
-          disabled={!isValid}
+          disabled={!isValid || isLoading}
         >
-          Registrar
+          {isLoading ? <Spinner /> : "Registrar"}
         </button>
       </div>
     </form>
