@@ -8,6 +8,7 @@ import Imagen2 from '../../assets/imgDashboard.png';
 import Imagen3 from '../../assets/imgDashboard.png';
 import Imagen4 from '../../assets/imgDashboard.png';
 import PaymentModal from './ModalPayment/PaymentModal';
+import DashboardFilter from '../../components/DashboardFilter';
 
 const ReservationView = () => {
   const navigate = useNavigate();
@@ -42,7 +43,8 @@ const ReservationView = () => {
 
   return (
     <>
-      {/* HEADER = BOTON VOLVER + TITULO */}
+      {/* HEADER */}
+      <DashboardFilter />
       <div className="px-4 md:px-16 my-4">
         <button
           onClick={handleGoBack}
