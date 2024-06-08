@@ -1,12 +1,12 @@
 import './DashboardView.css';
 import PlacesCard from './PlacesCard/PlacesCard';
-import DashboardFilter from '../../components/DashboardFilter'; // Asegúrate de importar el DashboardFilter
+import DashboardFilter from '../../components/DashboardFilter'; 
 
 const DashboardView = () => {
   return (
     <div className="dashboard-view">
       <div className="header">
-        <DashboardFilter /> {/* Usar el DashboardFilter aquí */}
+        <DashboardFilter /> 
         <div className="filters-carousel">
           <div className="filters">
             <button className="filter-button">Full Nature</button>
