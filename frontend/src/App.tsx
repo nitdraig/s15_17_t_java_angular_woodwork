@@ -10,6 +10,8 @@ import Reservation from "./pages/reservation/Reservation";
 import EditProfile from "./pages/editProfile/EditProfile";
 import { AuthProvider} from "./services/Api";
 import useAuth from './services/Api';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) => {
   const { isAuthenticated } = useAuth();
@@ -37,6 +39,7 @@ function App() {
           <Route path="/editProfile/:id" element={<ProtectedRoute element={<EditProfile />} />} />
         </Routes>
         <Footer />
+        <ToastContainer />
       </Router>
     </AuthProvider>
   );
