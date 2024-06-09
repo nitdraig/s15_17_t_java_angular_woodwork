@@ -51,11 +51,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       }
       const data = await response.json();
       const accessToken = data?.token;
+      const idUser = data?.id_user;
+
       if (!accessToken) {
         throw new Error("Access token not found in response");
       }
       setToken(accessToken);
       localStorage.setItem("token", accessToken);
+      localStorage.setItem("idUser", idUser);
+
     } catch (error) {
       console.error("Failed to login", error);
       throw error;
@@ -87,6 +91,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const logout = () => {
     setToken(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("idUser");
+
   };
 
   const contextValue: AuthContextType = {
