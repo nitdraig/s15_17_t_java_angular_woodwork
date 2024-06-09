@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { ILoginFormInput } from '../../../types/Types';
 import useAuth from '../../../services/Api';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from '../../../components/Spinner';
@@ -10,7 +10,7 @@ import Spinner from '../../../components/Spinner';
 export const LoginForm: React.FC = () => {
   const { register, handleSubmit, formState: { errors, isValid } } = useForm<ILoginFormInput>({ mode: 'onChange' });
   const { login } = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<ILoginFormInput> = async (data) => {
@@ -18,7 +18,8 @@ export const LoginForm: React.FC = () => {
     try {
       await login(data.email, data.password);
       toast.success('¡Inicio de sesión exitoso!');
-      navigate('/dashboard');
+      window.location.href = '/dashboard'
+      // navigate('/dashboard');
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
       toast.error('Error en el inicio de sesión. Por favor, intenta nuevamente.');

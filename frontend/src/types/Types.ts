@@ -20,3 +20,10 @@ export interface PaymentModalProps {
   selectedDay: Date;
   pricePerHour: number;
 }
+
+export interface UserI {
+  id_user: number;
+  email: string;
+  fullName: string;
+  profilePicture: string;
+}
