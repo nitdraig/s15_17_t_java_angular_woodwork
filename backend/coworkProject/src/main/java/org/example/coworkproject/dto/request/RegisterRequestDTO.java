@@ -18,6 +18,7 @@ public class RegisterRequestDTO {
     @NotBlank(message = "Email is required.")
     @Email(message = "Invalid email address.")
     @Size(max = 50, message = "Email must not exceed 50 characters ")
+    @Pattern(regexp = ".+@.+\\.[a-zA-Z]{2,}", message = "Email should have a valid domain with at least two characters")
     private String email;
 
     @NotBlank(message = "Password is required.")
@@ -29,5 +30,6 @@ public class RegisterRequestDTO {
     private String password;
 
     @NotBlank(message = "Full name is required.")
+    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Full name should only contain letters and spaces")
     private String fullName;
 }
