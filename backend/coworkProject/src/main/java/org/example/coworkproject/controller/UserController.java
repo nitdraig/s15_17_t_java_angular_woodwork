@@ -1,8 +1,9 @@
 package org.example.coworkproject.controller;
 
 import io.jsonwebtoken.io.IOException;
+import jakarta.validation.Valid;
+import org.example.coworkproject.dto.request.ChangePasswordRequestDTO;
 import org.example.coworkproject.dto.response.UserResponseDTO;
-import org.example.coworkproject.entity.UserEntity;
 import org.example.coworkproject.exception.ExceptionMethods;
 import org.example.coworkproject.exception.MyException;
 import org.example.coworkproject.service.UserService;
@@ -46,9 +47,10 @@ public class UserController {
     }
 
     @PutMapping("/changeUserPassword/{id_user}")
-    public ResponseEntity<UserResponseDTO> changePassword(@RequestParam String password, @PathVariable Long id_user) throws MyException {
+    public ResponseEntity<UserResponseDTO> changePassword(@Valid @RequestBody ChangePasswordRequestDTO changePasswordRequestDTO, @PathVariable Long id_user) throws MyException {
 
-        UserResponseDTO userResponseDTO = userService.changeUserPassword(id_user, password);
+        UserResponseDTO userResponseDTO = userService.changeUserPassword(id_user, changePasswordRequestDTO);
+        String password = changePasswordRequestDTO.getPassword();
 
         if (password == null || ExceptionMethods.onlySpaces(password)) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
