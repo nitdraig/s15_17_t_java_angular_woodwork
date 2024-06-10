@@ -5,10 +5,12 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { UserI } from "../types/Types";
 
 interface AuthContextType {
   token: string | null;
   isAuthenticated: boolean;
+  user: UserI | null;
   login: (email: string, password: string) => Promise<void>;
   register: (
     email: string,
@@ -16,11 +18,13 @@ interface AuthContextType {
     fullName: string
   ) => Promise<void>;
   logout: () => void;
+  getUserData: (idUser: string, token: string) => Promise<void>;
+  updateUserData: (updatedUser: UserI, IDUser: number) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const API_URL = "https://woodwork.onrender.com/v1/api/auth";
+const API_URL = "https://woodwork.onrender.com/v1/api";
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -28,18 +32,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("token")
   );
+  const [user, setUser] = useState<UserI | null>(null);
   const isAuthenticated = !!token;
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
-    if (storedToken) {
+    const storedIdUser = localStorage.getItem("idUser");
+    if (storedToken && storedIdUser) {
       setToken(storedToken);
+      getUserData(storedIdUser, storedToken);
     }
   }, []);
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await fetch(`${API_URL}/login`, {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +66,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       setToken(accessToken);
       localStorage.setItem("token", accessToken);
       localStorage.setItem("idUser", idUser);
-
+      await getUserData(idUser, accessToken);
     } catch (error) {
       console.error("Failed to login", error);
       throw error;
@@ -72,7 +79,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     fullName: string
   ) => {
     try {
-      const response = await fetch(`${API_URL}/register`, {
+      const response = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,17 +97,59 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const logout = () => {
     setToken(null);
+    setUser(null);
     localStorage.removeItem("token");
     localStorage.removeItem("idUser");
+  };
 
+  const getUserData = async (idUser: string, token: string) => {
+    try {
+      const response = await fetch(`${API_URL}/user/getUserById/${idUser}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data: UserI = await response.json();
+      setUser(data);
+    } catch (error) {
+      console.error("Failed to fetch user data", error);
+    }
+  };
+
+  const updateUserData = async (updatedUser: UserI, IDUser: number) => {
+    try {
+      const response = await fetch(`${API_URL}/user/updateUser/${IDUser}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedUser),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to update user data");
+      }
+      const data: UserI = await response.json();
+      setUser(data);
+    } catch (error) {
+      console.error("Failed to update user data", error);
+      throw error;
+    }
   };
 
   const contextValue: AuthContextType = {
     token,
     isAuthenticated,
+    user,
     login,
     register,
     logout,
+    getUserData,
+    updateUserData,
   };
 
   return (
@@ -111,8 +160,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth debe ser usado dentro de un AuthProvider");
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
-} 
+};
 export default useAuth;

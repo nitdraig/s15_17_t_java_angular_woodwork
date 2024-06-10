@@ -196,6 +196,7 @@ const EditProfileView = () => {
 
   if (loading) {
     return <Spinner />;
+    return <Spinner />;
   }
 
   if (error) {

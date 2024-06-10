@@ -12,13 +12,16 @@ import DashboardFilter from '../../components/DashboardFilter';
 
 const ReservationView = () => {
   const navigate = useNavigate();
-
   const [peopleCount, setPeopleCount] = useState(4);
   const [startTime, setStartTime] = useState<Date | null>(new Date());
   const [endTime, setEndTime] = useState<Date | null>(new Date());
   const [selectedDay, setSelectedDay] = useState<Date | null>(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pricePerHour = 5000;
+  const openDays = ["MONDAY"];
+  const openingTime = { hour: 9, minute: 0 };
+  const closingTime = { hour: 18, minute: 0 };
+  const capacity = 50;
 
   const services = [
     { name: 'Wifi', icon: <FaWifi className="text-xl text-zinc-700" /> },
@@ -74,6 +77,7 @@ const ReservationView = () => {
           <div>
             <div className="text-zinc-900 text-3xl md:text-6xl font-bold font-sans tracking-wider">Work Together</div>
             <div className="text-zinc-500 text-xl md:text-3xl font-normal font-['Montserrat'] tracking-wider">Tagle 3000</div>
+            
             <div className="w-full md:w-100 h-28 mt-4 flex-shrink-0 bg-[#848B77] opacity-80 rounded-[10px] mb-6 flex justify-around items-center">
               <div className="text-center text-[#000000] font-kanit font-bold text-[12px] md:text-[16px] leading-normal tracking-[0.64px]">
                 Favorito entre<br />los freelancers
@@ -91,6 +95,22 @@ const ReservationView = () => {
               </div>
               <div className="text-[#000000] font-kanit font-bold text-[12px] md:text-[16px] leading-normal tracking-[0.64px]">
                 Opiniones
+              </div>
+            </div>
+
+            {/* Días, Horarios + Capacidad Disponibles */}
+            <div className="bg-gray-200 p-4 rounded-lg mt-3 px-8 mb-4 flex flex-col md:flex-row justify-between items-center">
+              <div className="mb-2 md:mb-0 text-center md:text-left">
+                <span className="font-bold text-lg">Días disponibles:</span><br/> {openDays.join(', ')}
+              </div>
+              <div className="mb-2 md:mb-0 text-center md:text-left">
+                <span className="font-bold text-lg">Horario de apertura:</span><br/> {openingTime.hour}:{openingTime.minute === 0 ? '00' : openingTime.minute}
+              </div>
+              <div className="mb-2 md:mb-0 text-center md:text-left">
+                <span className="font-bold text-lg">Horario de cierre:</span><br/> {closingTime.hour}:{closingTime.minute === 0 ? '00' : closingTime.minute}
+              </div>
+              <div className="text-center md:text-left">
+                <span className="font-bold text-lg">Capacidad:</span><br/> {capacity} personas
               </div>
             </div>
           </div>
