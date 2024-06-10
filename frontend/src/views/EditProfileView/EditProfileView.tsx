@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate, useParams } from 'react-router-dom';
+import useAuth from '../../services/Api';
+
+import { AiOutlineClose } from 'react-icons/ai';
 import { FiEdit } from "react-icons/fi";
-import Spinner from '../../components/Spinner';
+import { toast } from 'react-toastify';
+
 import { UserI } from '../../types/Types';
-
-
+import Spinner from '../../components/Spinner';
 
 const EditProfileView = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const initialData: UserI = {
     id_user: 1,
@@ -19,50 +22,24 @@ const EditProfileView = () => {
     profilePicture: "",
   };
 
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<UserI>(initialData);
-  const [hasChanged, setHasChanged] = useState<boolean>(false);
+  const [token, setToken] = useState<string | null>(null);
+
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [alertIsHidden, setAlertIsHidden] = useState<boolean>(true);
+  const [hasChanged, setHasChanged] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+
 
   const [selectedFile, setSelectedFile] = useState<File>();
   const [previewURL, setPreviewURL] = useState<string>('');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = window.localStorage.getItem("token")
-
-        if (!token) {
-          alert("Inicia sesión para continuar!")
-          navigate('/login');
-        }
-
-        const response = await fetch(`https://woodwork.onrender.com/v1/api/user/getUserById/${id}`, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          }
-        }); { }
-        console.log(response);
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        
-        const data: UserI = await response.json();
-        setUser(data)
-        reestablecer()
-      } catch (error: any) {
-        console.log(error);
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-
+    const userToken = window.localStorage.getItem("token");
+    setToken(userToken)
+    getUserById();
   }, [id]);
 
   useEffect(() => {
@@ -72,6 +49,42 @@ const EditProfileView = () => {
 
     setHasChanged(dataHasChanged);
   }, [user]);
+
+  const getUserById = async () => {
+    const token = window.localStorage.getItem("token");
+    
+    try {
+
+      if (!token) {
+        toast.error("Inicia sesión para continuar!")
+        setTimeout(() => {
+          logout();
+          navigate('/login');
+        }, 2500);
+      }
+
+      const response = await fetch(`https://woodwork.onrender.com/v1/api/user/getUserById/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      console.log(response);
+
+      if (!response.ok) {
+        throw new Error('Lo siento, hubo un error. Vuelve a intentarlo.');
+      }
+
+      const data: UserI = await response.json();
+      setUser(data)
+      clear()
+    } catch (error: any) {
+      console.log(error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -99,14 +112,90 @@ const EditProfileView = () => {
     }
   }
 
-  const reestablecer = () => {
+  const editUser = async () => {
+    let body = new FormData();
+
+    body.append("fullName", user.fullName);
+    if (selectedFile) {
+      body.append("profilePicture", selectedFile);
+    }
+
+    try {
+      const response = await fetch(`https://woodwork.onrender.com/v1/api/user/updateUser/${id}`, {
+        method: 'PUT',
+        headers: {
+          // 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body
+      });
+      console.log(response);
+
+      if (!response.ok) {
+        throw new Error('Lo siento, hubo un error. Vuelve a intentarlo.');
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+    } catch (error: any) {
+      console.log(error);
+      setError(error.message);
+    }
+
+  }
+
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setPassword(value)
+  }
+
+  const handleChangeConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setConfirmPassword(value)
+  }
+
+  const changePassword = async () => {
+    let body = new FormData();
+    body.append("password", password);
+
+    try {
+      const response = await fetch(`https://woodwork.onrender.com/v1/api/user/changeUserPassword/${id}`, {
+        method: 'PUT',
+        headers: {
+          // 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body
+      });
+      console.log(response);
+
+      if (!response.ok) {
+        throw new Error('Lo siento, hubo un error. Vuelve a intentarlo.');
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setAlertIsHidden(true)
+      toast.success("Se cambió correctamente su contraseña.")
+      getUserById()
+
+    } catch (error) {
+      console.log(error);
+      
+      toast.error("No se pudo cambiar la contraseña, intentalo nuevamente.")
+    }
+
+  }
+
+  const clear = () => {
     setPreviewURL("")
     setSelectedFile(undefined)
     setUser(initialData)
   }
 
   if (loading) {
-    return <Spinner/>;
+    return <Spinner />;
   }
 
   if (error) {
@@ -121,7 +210,7 @@ const EditProfileView = () => {
           <div className='group relative w-28 h-28 rounded-full bg-white flex items-center justify-center hover:cursor-pointer'>
             {
               previewURL ? (
-                <img src={previewURL} alt="Previsualización" className='rounded-full w-full object-fit' />
+                <img src={previewURL} alt="Profile image" className='rounded-full w-full object-fit' />
               ) :
                 <div className='w-28 h-28 rounded-full flex items-center justify-center'>
                   <div className='rounded-full w-full h-full bg-[#8DB600] text-white flex items-center justify-center text-5xl'>
@@ -137,7 +226,7 @@ const EditProfileView = () => {
               previewURL ?
                 <div
                   onClick={() => {
-                    reestablecer()
+                    clear()
                   }}
                   className='absolute bg-red-700 p-1 rounded-full z-30 top-0 right-0 text-sm text-white'>
                   <AiOutlineClose />
@@ -164,8 +253,8 @@ const EditProfileView = () => {
       <div className={`${hasChanged ? 'flex' : 'hidden'} fixed z-50 bottom-10 left-1/2 -translate-x-1/2 w-3/4 flex items-center justify-between p-4 bg-white text-black rounded-xl border border-black`}>
         <span className='font-bold text-xl'>Cuidado, ¡tienes cambios sin guardar!</span>
         <div className='flex items-center justify-center gap-x-2'>
-          <button onClick={reestablecer} className='font-bold hover:underline'>Reestablecer</button>
-          <button className='px-3 py-1.5 rounded-md bg-green-700 font-bold text-white'>Guardar cambios</button>
+          <button onClick={clear} className='font-bold hover:underline'>clear</button>
+          <button onClick={editUser} className='px-3 py-1.5 rounded-md bg-green-700 font-bold text-white'>Guardar cambios</button>
         </div>
       </div>
 
@@ -184,16 +273,28 @@ const EditProfileView = () => {
           </div> */}
           <div className='flex flex-col w-full gap-y-2'>
             <label className='text-xs text-slate-800 font-bold' htmlFor="">NUEVA CONTRASEÑA</label>
-            <input type="text" />
+            <input
+              type="text"
+              name="newPassword"
+              value={password}
+              onChange={handleChangePassword}
+              placeholder="Contraseña"
+            />
           </div>
           <div className='flex flex-col w-full gap-y-2'>
             <label className='text-xs text-slate-800 font-bold' htmlFor="">CONFIRMAR NUEVA CONTRASEÑA</label>
-            <input type="text" />
+            <input
+              type="text"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={handleChangeConfirmPassword}
+              placeholder="Confirmar contraseña"
+            />
           </div>
         </div>
         <div className='flex items-center justify-end gap-x-3 mt-6 w-full '>
           <button onClick={() => setAlertIsHidden(true)} className='font-bold hover:underline'>Cancelar</button>
-          <button className='px-3 py-1.5 rounded-md bg-green-700 font-bold text-white'>Cambiar</button>
+          <button onClick={changePassword} className='px-3 py-1.5 rounded-md bg-green-700 font-bold text-white'>Cambiar</button>
         </div>
       </div>
     </div >
