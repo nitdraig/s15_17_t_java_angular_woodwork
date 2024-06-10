@@ -71,7 +71,7 @@ export const LoginForm: React.FC = () => {
         />
         {errors.password && <p className="mt-2 text-sm text-red-600">{errors.password.message}</p>}
         <div className="mt-2 text-sm text-center text-[#31543D]">
-          Olvidaste tu contraseña? <a href="#" className="font-medium text-[#A67C52] hover:underline">Recuperar password</a>
+          ¿Olvidaste tu contraseña? <a href="#" className="font-medium text-[#A67C52] hover:underline">Recuperar password</a>
         </div>  
       </div>
 
@@ -84,7 +84,7 @@ export const LoginForm: React.FC = () => {
           {isLoading ? <Spinner /> : 'Iniciar Sesión'}
         </button>
         <div className="text-sm text-center text-[#31543D] mt-4">
-          No tienes cuenta? <a href="/register" className="font-medium text-[#A67C52] hover:underline">Registrarse</a>
+          ¿No tienes cuenta? <a href="/register" className="font-medium text-[#A67C52] hover:underline">Registrarse</a>
         </div>
       </div>
     </form>
