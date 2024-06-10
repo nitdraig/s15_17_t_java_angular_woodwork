@@ -25,7 +25,7 @@ Información del Proyecto
 
 <div align="center">
 
-<img src="https://github.com/No-Country/c17-11-t-node-react/blob/main/Dise%C3%B1o/logo_mascocuidado.png" width="300" alt="LOGO">
+<img src="https://github.com/nitdraig/woodwork/tree/main/frontend/src/assets/logo.png" width="300" alt="LOGO">
 
   <h1>WoodWork</h1>
   <p>Plataforma que busca conectar a trabajadores independientes, emprendedores y pequeñas empresas con 
