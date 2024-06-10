@@ -26,7 +26,7 @@ const FaqSection: React.FC = () => {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-gray-100 rounded-lg transition duration-150 ease-in-out p-6"
+                className="bg-gray-100 rounded-lg transition duration-300 ease-in-out p-6"
               >
                 <dt
                   className="text-lg leading-6 font-medium text-gray-900 cursor-pointer flex justify-between items-center"

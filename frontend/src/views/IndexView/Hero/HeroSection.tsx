@@ -19,7 +19,7 @@ const HeroSection: React.FC = () => {
             <img
               src={slide.image}
               alt={slide.title}
-              className="lg:w-full  lg:h-auto h-screen opacity-35 object-cover"
+              className="lg:w-full  lg:h-[580px] h-screen opacity-35 object-cover"
             />
             <div className="absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
               <h2 className="text-4xl font-bold mb-4">{slide.title}</h2>
