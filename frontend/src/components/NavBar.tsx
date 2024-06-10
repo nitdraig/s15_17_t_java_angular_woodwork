@@ -50,7 +50,7 @@ export default function NavBar() {
           href="/#contact"
           className="text-lg no-underline mt-2 sm:mt-0 ml-2 text-[#262626] hover:text-gray-800 font-bold transition duration-150 ease-in-out"
         >
-          Contacto
+          Contáctanos
         </a>
         <a
           href="/login"

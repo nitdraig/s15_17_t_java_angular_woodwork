@@ -10,13 +10,13 @@ const ContactSection: React.FC = () => {
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-base text-black font-semibold tracking-wide uppercase">
-            Contactanos
+            Contáctanos
           </h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
             Resolvemos tus dudas
           </p>
           <p className="mt-4 max-w-2xl text-xl text-black lg:mx-auto">
-            Estamos encantados por saber que opinas de nuestra plataforma. Y
+            Estamos encantados por saber qué opinas de nuestra plataforma. Y
             resolver tus dudas
           </p>
         </div>
