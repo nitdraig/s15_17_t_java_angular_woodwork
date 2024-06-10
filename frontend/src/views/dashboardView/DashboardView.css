@@ -2,25 +2,13 @@
   display: flex;
   flex-direction: column;
   background-color: #FFF; /* Fondo blanco para todo el dashboard */
-  padding: 40px;
   max-width: 100%;
   margin: 0 auto; /* Centra el contenido horizontalmente */
   box-sizing: border-box;
 }
 
-.header {
-  background-color: #323E1D; /* Fondo diferente para el header */
-  padding: 25px;
-  display: flex;
-  flex-direction: column; /* Apila los elementos verticalmente */
-  align-items: center; /* Alinea los elementos al centro horizontalmente */
-  width: calc(100% + 80px); /* Para contrarrestar el padding del contenedor padre */
-  margin: -40px; /* Para contrarrestar el padding del contenedor padre */
-  margin-bottom: 20px; /* Añade un margen inferior para separar del contenido siguiente */
-  box-sizing: border-box;
-}
-
 /* Resto del CSS */
+
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
