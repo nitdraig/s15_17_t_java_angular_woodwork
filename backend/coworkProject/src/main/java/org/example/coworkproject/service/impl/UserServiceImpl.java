@@ -1,5 +1,7 @@
 package org.example.coworkproject.service.impl;
 
+import jakarta.validation.Valid;
+import org.example.coworkproject.dto.request.ChangePasswordRequestDTO;
 import org.example.coworkproject.dto.response.UserResponseDTO;
 import org.example.coworkproject.entity.UserEntity;
 import org.example.coworkproject.exception.MyException;
@@ -28,8 +30,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserResponseDTO changeUserPassword(Long id_user, String password) throws MyException {
+    public UserResponseDTO changeUserPassword(Long id_user, @Valid ChangePasswordRequestDTO changePasswordRequestDTO) throws MyException {
 
+        String password = changePasswordRequestDTO.getPassword();
         validatePassword(password);
 
         UserEntity user = userRepository.findById(id_user).orElse(null);
