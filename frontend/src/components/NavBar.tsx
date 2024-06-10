@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../services/Api";
-
+import logo from "../assets/logo_nobac.png";
 export default function NavBar() {
   const { logout, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -17,10 +17,10 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="font-sans flex flex-col lg:h-24 sm:flex-row sm:justify-between py-4 px-6 lg:px-24 bg-white shadow sm:items-center w-full">
+    <nav className="font-sans flex flex-col lg:h-20 sm:flex-row sm:justify-between py-4 px-6 lg:px-24 bg-white shadow sm:items-center w-full">
       <div className="flex justify-between items-center">
-        <a href="/#" className="lg:text-5xl text-3xl font-bold text-[#262626]">
-          WoodWork
+        <a href="/#">
+          <img src={logo} className="lg:h-20 h-16" />
         </a>
         <button
           className="sm:hidden text-3xl text-[#262626]"
