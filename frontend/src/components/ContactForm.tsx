@@ -51,7 +51,7 @@ const ContactForm = () => {
               type="email"
               id="email"
               {...register("email", {
-                required: "Email is required",
+                required: "Email es requerido",
                 pattern: {
                   value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                   message: "Correo electrónico inválido",
