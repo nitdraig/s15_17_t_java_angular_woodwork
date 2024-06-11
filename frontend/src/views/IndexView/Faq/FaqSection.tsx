@@ -11,7 +11,7 @@ const FaqSection: React.FC = () => {
     <section className="bg-[#556B2F] w-full h-screen py-16" id="faq">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
-          <h2 className="text-base text-black font-semibold tracking-wide uppercase">
+          <h2 className="text-base text-black font-semibold tracking-wide">
             FAQs
           </h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
