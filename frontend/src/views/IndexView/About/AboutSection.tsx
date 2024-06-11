@@ -133,7 +133,7 @@ const AboutSection: React.FC = () => {
                 Fundada en 2024, por nuestro{" "}
                 <a target="_blank" href="#" className="text-[#8DB600]">
                   equipo
-                </a>
+                </a>.
               </dd>
             </div>
           </dl>
