@@ -215,7 +215,7 @@ const ReservationView = () => {
 
       {/* SERVICIOS */}
       <div className="px-7 md:px-16 md:mt-8 mb-8">
-        <h2 className="text-zinc-900 text-4xl font-bold font-sans tracking-wider mb-6 md:mb-4">Servicios Disponibles</h2>
+        <h2 className="text-zinc-900 text-center md:text-left text-3xl md:text-4xl font-bold font-sans tracking-wider mb-6 md:mb-4">Servicios Disponibles</h2>
         <div className="grid grid-cols-2 gap-4 ">
           {services.map((service, index) => (
             <div key={index} className="flex items-center space-x-2">
@@ -229,7 +229,7 @@ const ReservationView = () => {
 
       {/* DESCRIPTION */}
       <div className="px-4 md:px-16 mb-8">
-        <h2 className="text-zinc-900 text-4xl font-bold font-sans tracking-wider mb-4">Descripción del coworking</h2>
+        <h2 className="text-zinc-900 text-center md:text-left text-2xl md:text-4xl font-bold font-sans tracking-wider mb-4">Descripción del coworking</h2>
         <p className="text-zinc-700 text-medium md:text-xl px-2 md:px-0">
           Nuestro espacio de coworking en Tagle 3000 ofrece un ambiente moderno y cómodo para trabajar. Equipado con conexión Wi-Fi de alta velocidad, aire acondicionado para mantenerte fresco y café ilimitado para mantenerte despierto. Contamos con espacios públicos y privados, adaptados a tus necesidades, y tomacorrientes disponibles en todas las áreas. Ideal para trabajar en equipo o de manera individual, asegurando una experiencia productiva y agradable.
         </p>

@@ -2,7 +2,7 @@ import { FaSearch } from 'react-icons/fa';
 
 const DashboardFilter = () => {
   return (
-    <div className="w-screen -mx-4 px-4 bg-[#323E1D] py-6 flex flex-col items-center box-border">
+    <div className="w-full mr-2 px-4 bg-[#323E1D] py-6 flex flex-col items-center box-border">
       <div className="relative w-full max-w-[834px] mb-4">
         <input
           type="text"
