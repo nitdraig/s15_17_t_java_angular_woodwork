@@ -27,3 +27,26 @@ export interface UserI {
   fullName: string;
   profilePicture: string;
 }
+
+export interface Workspace {
+  id_workspace: number;
+  openDays: string[];
+  openingTime: string;
+  closingTime: string;
+  workspaceName: string;
+  address: string;
+  pricePerHour: number;
+  description: string;
+  capacity: number;
+  workspaceImages: string[];
+  mainImage: string;
+}
+
+export interface FormattedWorkspace {
+  title: string;
+  image: string;
+  tag: string;
+  rating: string;
+  description: string;
+  price: string;
+}

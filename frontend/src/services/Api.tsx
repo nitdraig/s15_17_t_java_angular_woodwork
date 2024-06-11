@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { UserI } from "../types/Types";
 import axios from "axios";
+import { Workspace } from '../types/Types';
 
 interface AuthContextType {
   token: string | null;
@@ -168,7 +169,7 @@ const useAuth = () => {
 export default useAuth;
 
 // Obtener workspaces.
-export const fetchWorkspaces = async () => {
+export const fetchWorkspaces = async (): Promise<Workspace[]> => {
   const token = localStorage.getItem("token");
   if (!token) throw new Error("No token found");
 
