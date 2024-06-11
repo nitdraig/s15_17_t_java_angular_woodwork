@@ -35,7 +35,7 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
           <Route path="/login" element={<UnauthenticatedRoute element={<Login />} />} />
           <Route path="/register" element={<UnauthenticatedRoute element={<Register />} />} />
-          <Route path="/reservation" element={<ProtectedRoute element={<Reservation />} />} />
+          <Route path="/reservation/:id" element={<ProtectedRoute element={<Reservation />} />} />
           <Route path="/editProfile/:id" element={<ProtectedRoute element={<EditProfile />} />} />
         </Routes>
         <Footer />

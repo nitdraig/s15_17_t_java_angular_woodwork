@@ -43,6 +43,7 @@ export interface Workspace {
 }
 
 export interface FormattedWorkspace {
+  id_workspace: number;
   title: string;
   image: string;
   tag: string;
@@ -50,3 +51,19 @@ export interface FormattedWorkspace {
   description: string;
   price: string;
 }
+
+export interface WorkspaceDetail extends Workspace {
+  // Campo adicional.
+}
+
+export interface PaymentModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  peopleCount: number;
+  startTime: Date;
+  endTime: Date;
+  selectedDay: Date;
+  pricePerHour: number;
+}
+
+

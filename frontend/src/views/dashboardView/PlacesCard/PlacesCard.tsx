@@ -1,5 +1,6 @@
 import '../DashboardView.css';
 import { FormattedWorkspace } from '../../../types/Types';
+import { Link } from 'react-router-dom';
 
 interface PlacesCardProps {
   workspaces: FormattedWorkspace[];
@@ -13,14 +14,10 @@ const PlacesCard: React.FC<PlacesCardProps> = ({ workspaces }) => {
     return rating;
   };
 
-  const handleCardClick = (title: string) => {
-    alert(`Card clicked: ${title}`);
-  };
-
   return (
     <div className="card-container">
       {workspaces.map((workspace, index) => (
-        <div className="card" key={index} onClick={() => handleCardClick(workspace.title)}>
+        <Link to={`/reservation/${workspace.id_workspace}`} key={index} className="card">
           <img src={workspace.image} alt={workspace.title} className="card-image" />
           <div className="card-content">
             <div className="flex">
@@ -33,7 +30,7 @@ const PlacesCard: React.FC<PlacesCardProps> = ({ workspaces }) => {
             <p className="description">{workspace.description}</p>
             <p className="price mt-1">{workspace.price}</p>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

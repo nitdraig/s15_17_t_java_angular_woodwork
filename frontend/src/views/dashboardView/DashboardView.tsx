@@ -13,12 +13,13 @@ const DashboardView = () => {
       try {
         const data: Workspace[] = await fetchWorkspaces();
         const formattedData: FormattedWorkspace[] = data.map((workspace: Workspace) => ({
+          id_workspace: workspace.id_workspace,
           title: workspace.workspaceName,
           image: workspace.mainImage,
           tag: workspace.openDays.join(", "),
           rating: `${workspace.pricePerHour} ARS/hr`,
           description: workspace.address,
-          price: `${workspace.pricePerHour} ARS/hr`
+          price: `${workspace.pricePerHour} ARS/hr`,
         }));
         setWorkspaces(formattedData);
       } catch (error) {
