@@ -109,17 +109,17 @@ const ReservationView = () => {
         </button>
       </div>
       <div className="pl-4 md:pl-16 pb-6 text-zinc-900 text-3xl md:text-6xl font-bold font-sans tracking-wider">
-        Work Together
+      {workspace.workspaceName}
       </div>
 
       {/* IMAGES SECTION */}
       <div className="flex flex-col md:flex-row px-4 md:px-16 mb-8">
         <div className="w-full md:w-4/6 flex items-stretch pr-0 md:pr-5 mb-4 md:mb-0">
-          <img className="w-full rounded-lg object-cover shadow-lg" src={Imagen1} alt="Work Together" />
+          <img className="w-full rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt={workspace.workspaceName} />
         </div>
         <div className="w-full md:w-2/6 flex flex-col justify-between space-y-4">
-          <img className="w-full rounded-lg object-cover shadow-lg" src={Imagen2} alt="Work Together" />
-          <img className="w-full rounded-lg object-cover shadow-lg" src={Imagen3} alt="Work Together" />
+          <img className="w-full rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt={workspace.workspaceName} />
+          <img className="w-full rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt={workspace.workspaceName} />
         </div>
       </div>
 
