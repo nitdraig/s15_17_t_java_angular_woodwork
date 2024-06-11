@@ -43,7 +43,7 @@ const AboutSection: React.FC = () => {
                   Nuestra Misión
                 </p>
               </dt>
-              <dd className="mt-2 ml-16 text-base text-black">
+              <dd className="mt-2 ml-16 text-base text-black font-semibold" style={{ textShadow: '1px 1px 2px #BBBBBB' }}>
                 Nuestra misión es proporcionar el mejor servicio posible.
                 Estamos dedicados a ayudarte a tener éxito en todos tus
                 esfuerzos.
@@ -72,7 +72,7 @@ const AboutSection: React.FC = () => {
                   Nuestra Visión
                 </p>
               </dt>
-              <dd className="mt-2 ml-16 text-base text-black">
+              <dd className="mt-2 ml-16 text-base text-black font-semibold" style={{ textShadow: '1px 1px 2px #BBBBBB' }}>
                 Nuestro objetivo es ser la empresa líder en nuestro campo,
                 proporcionando calidad y servicio incomparables a nuestros
                 clientes.
@@ -101,7 +101,7 @@ const AboutSection: React.FC = () => {
                   Nuestros Valores
                 </p>
               </dt>
-              <dd className="mt-2 ml-16 text-base text-black">
+              <dd className="mt-2 ml-16 text-base text-black font-semibold" style={{ textShadow: '1px 1px 2px #BBBBBB' }}>
                 La Integridad, la Excelencia y el Trabajo en Equipo están en el
                 núcleo de todo lo que hacemos.
               </dd>
@@ -129,9 +129,9 @@ const AboutSection: React.FC = () => {
                   Nuestra Historia
                 </p>
               </dt>
-              <dd className="mt-2 ml-16 text-base text-black">
+              <dd className="mt-2 ml-16 text-base text-black font-semibold" style={{ textShadow: '1px 1px 2px #BBBBBB' }}>
                 Fundada en 2024, por nuestro{" "}
-                <a target="_blank" href="#" className="text-[#8DB600]">
+                <a target="_blank" href="#" className="text-[#8DB600]" style={{ textShadow: "none" }}>
                   equipo
                 </a>
               </dd>
