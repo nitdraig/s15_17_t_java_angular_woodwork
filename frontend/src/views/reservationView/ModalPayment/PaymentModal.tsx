@@ -77,7 +77,7 @@ const PaymentModal: FC<PaymentModalProps> = ({ isOpen, onClose, peopleCount, sta
     <>
       <ToastContainer />
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div className="bg-white  mx-8 px-8 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg w-full max-w-3xl max-h-[96vh] overflow-y-auto">
+        <div className="bg-white mx-8 px-8 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg w-full max-w-3xl max-h-[96vh] overflow-y-auto">
           <h2 className="text-xl sm:text-2xl font-bold mb-4">Opciones de Pago</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
             <div>

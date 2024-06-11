@@ -8,6 +8,7 @@ import React, {
 import { UserI } from "../types/Types";
 import axios from "axios";
 import { Workspace } from '../types/Types';
+import { WorkspaceDetail } from '../types/Types';
 
 interface AuthContextType {
   token: string | null;
@@ -174,6 +175,20 @@ export const fetchWorkspaces = async (): Promise<Workspace[]> => {
   if (!token) throw new Error("No token found");
 
   const response = await axios.get(`${API_URL}/workspace/listOfWorkspaces`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};
+
+// Obtener detalles de un workspace.
+export const fetchWorkspaceById = async (id: number): Promise<WorkspaceDetail> => {
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No token found");
+
+  const response = await axios.get(`${API_URL}/workspace/getWorkspaceById/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
