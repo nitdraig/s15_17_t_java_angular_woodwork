@@ -1,15 +1,12 @@
 import './DashboardView.css';
 import PlacesCard from './PlacesCard/PlacesCard';
-import DashboardFilter from '../../components/DashboardFilter'; 
+import DashboardFilter from '../../components/DashboardFilter';
 
 const DashboardView = () => {
   return (
     <div className="dashboard-view">
-      
-      <DashboardFilter /> 
-     
+      <DashboardFilter />
       <PlacesCard />
-      
     </div>
   );
 }
