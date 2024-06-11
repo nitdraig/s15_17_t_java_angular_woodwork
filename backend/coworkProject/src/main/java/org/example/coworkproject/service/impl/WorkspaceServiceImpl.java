@@ -2,11 +2,13 @@ package org.example.coworkproject.service.impl;
 
 import io.jsonwebtoken.io.IOException;
 import org.example.coworkproject.dto.request.WorkspaceRequestDTO;
+import org.example.coworkproject.dto.response.QualitiesResponseDTO;
 import org.example.coworkproject.dto.response.WorkspaceResponseDTO;
 import org.example.coworkproject.entity.QualitiesEntity;
 import org.example.coworkproject.entity.ReservationEntity;
 import org.example.coworkproject.entity.WorkspaceEntity;
 import org.example.coworkproject.helper.ImageHelper;
+import org.example.coworkproject.mapper.QualitiesMapper;
 import org.example.coworkproject.mapper.WorkspaceMapper;
 import org.example.coworkproject.repository.QualitiesRepository;
 import org.example.coworkproject.repository.WorkspaceRepository;
@@ -33,6 +35,9 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     @Autowired
     private ImageHelper imageHelper;
+
+    @Autowired
+    private QualitiesMapper qualitiesMapper;
 
     @Override
     public List<WorkspaceResponseDTO> getAllWorkspaces() {
@@ -180,6 +185,13 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         }
 
         return workspaceMapper.workspaceToWorkspaceResponseDTO(workspace);
+    }
+
+    @Override
+    public List<QualitiesResponseDTO> getQualitiesByWorkspace(Long id_workspace) {
+
+        List<QualitiesEntity> qualities = workspaceRepository.findById(id_workspace).get().getQualities();
+        return qualitiesMapper.qualitiesToQualitiesResponseDTO(qualities);
     }
 }
 
