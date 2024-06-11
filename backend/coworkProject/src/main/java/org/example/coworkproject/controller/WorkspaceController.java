@@ -1,6 +1,7 @@
 package org.example.coworkproject.controller;
 
 import org.example.coworkproject.dto.request.WorkspaceRequestDTO;
+import org.example.coworkproject.dto.response.QualitiesResponseDTO;
 import org.example.coworkproject.dto.response.WorkspaceResponseDTO;
 import org.example.coworkproject.service.WorkspaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,7 +108,25 @@ public class WorkspaceController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(404).body(null);
         }
+    }
 
+    @GetMapping("/getQualitiesByWorkspace/{id_workspace}")
+    public ResponseEntity<List<QualitiesResponseDTO>> getQualitiesByWorkspace(@PathVariable Long id_workspace) {
+
+        WorkspaceResponseDTO workspaceResponseDTO = workspaceService.getWorkspaceById(id_workspace);
+
+        if (workspaceResponseDTO != null) {
+
+            List<QualitiesResponseDTO> qualitiesResponseListDTO = workspaceService.getQualitiesByWorkspace(id_workspace);
+
+            if (qualitiesResponseListDTO.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            } else {
+                return ResponseEntity.status(HttpStatus.OK).body(qualitiesResponseListDTO);
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @DeleteMapping("/deleteWorkspace/{id_workspace}")
