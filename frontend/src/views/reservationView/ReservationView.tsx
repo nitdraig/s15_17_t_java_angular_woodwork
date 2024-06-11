@@ -8,11 +8,6 @@ import { WorkspaceDetail } from '../../types/Types';
 import PaymentModal from './ModalPayment/PaymentModal';
 import DashboardFilter from '../../components/DashboardFilter';
 
-import Imagen1 from '../../assets/imgDashboard.png';
-import Imagen2 from '../../assets/imgDashboard.png';
-import Imagen3 from '../../assets/imgDashboard.png';
-import Imagen4 from '../../assets/imgDashboard.png';
-
 const ReservationView = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
@@ -67,8 +62,8 @@ const ReservationView = () => {
     minute: number;
   };
   
-  const openingTime: Time = { hour: 0, minute: 0 };
-  const closingTime: Time = { hour: 0, minute: 0 };
+  const openingTime: Time = { hour: parseInt(workspace.openingTime), minute: 0 };
+  const closingTime: Time = { hour: parseInt(workspace.closingTime), minute: 0 };
 
   const getMinTime = (time: Time): Date => {
     const date = new Date();
@@ -127,8 +122,8 @@ const ReservationView = () => {
         <div className="w-full md:w-4/6 p-4 md:p-8 md:pl-0">
           {/* INFORMATION */}
           <div>
-            <div className="text-zinc-900 text-3xl md:text-6xl font-bold font-sans tracking-wider">Work Together</div>
-            <div className="text-zinc-500 text-xl md:text-3xl font-normal font-['Montserrat'] tracking-wider">Tagle 3000</div>
+            <div className="text-zinc-900 text-3xl md:text-6xl font-bold font-sans tracking-wider">{workspace.workspaceName}</div>
+            <div className="text-zinc-500 text-xl md:text-3xl font-normal font-['Montserrat'] tracking-wider">{workspace.address}</div>
             
             <div className="w-full md:w-100 h-28 mt-4 flex-shrink-0 bg-[#848B77] opacity-80 rounded-[10px] mb-6 flex justify-around items-center">
               <div className="text-center text-[#000000] font-kanit font-bold text-[12px] md:text-[16px] leading-normal tracking-[0.64px]">
@@ -176,7 +171,7 @@ const ReservationView = () => {
                 <input
                   type="number"
                   min="1"
-                  max="50"
+                  max={capacity}
                   value={peopleCount}
                   onChange={(e) => setPeopleCount(Number(e.target.value))}
                   className="w-3/6 h-8 items-center p-2  bg-gray-200 rounded-lg cursor-pointer"
@@ -193,6 +188,8 @@ const ReservationView = () => {
                   timeCaption="Inicio"
                   dateFormat="h:mm aa"
                   className="w-full h-8 p-2 bg-gray-200 rounded-lg cursor-pointer"
+                  minTime={getMinTime(openingTime)}
+                  maxTime={getMaxTime(closingTime)}
                 />
               </div>
               <div className="flex items-center space-x-4">
@@ -206,6 +203,8 @@ const ReservationView = () => {
                   timeCaption="Fin"
                   dateFormat="h:mm aa"
                   className="w-full h-8 p-2 bg-gray-200 rounded-lg cursor-pointer"
+                  minTime={getMinTime(openingTime)}
+                  maxTime={getMaxTime(closingTime)}
                 />
               </div>
             </div>
@@ -222,7 +221,7 @@ const ReservationView = () => {
 
         {/* CARD */}
         <div className="w-full md:w-2/6 md:mt-20 flex flex-col h-5/6 space-y-8 py-12 px-8 mb-4 bg-[#323E1D] rounded-lg shadow-md">
-          <img className="w-full h-44 mt-2 rounded-lg object-cover shadow-lg" src={Imagen4} alt="Small Image" />
+          <img className="w-full h-44 mt-2 rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt="Small Image" />
           <button
             onClick={handleReserveClick}
             className="w-full bg-[#F9EC34] hover:bg-[#A67C52] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#31543D] font-medium rounded-lg text-sm md:text-lg px-5 py-2.5 text-center shadow-md hover:shadow-lg transition duration-150 ease-in-out"
@@ -283,7 +282,7 @@ const ReservationView = () => {
       <div className="px-4 md:px-16 mb-8">
         <h2 className="text-zinc-900 text-center md:text-left text-2xl md:text-4xl font-bold font-sans tracking-wider mb-4">Descripción del coworking</h2>
         <p className="text-zinc-700 text-medium md:text-xl px-2 md:px-0">
-          Nuestro espacio de coworking en Tagle 3000 ofrece un ambiente moderno y cómodo para trabajar. Equipado con conexión Wi-Fi de alta velocidad, aire acondicionado para mantenerte fresco y café ilimitado para mantenerte despierto. Contamos con espacios públicos y privados, adaptados a tus necesidades, y tomacorrientes disponibles en todas las áreas. Ideal para trabajar en equipo o de manera individual, asegurando una experiencia productiva y agradable.
+          {workspace.description}
         </p>
       </div>
 
