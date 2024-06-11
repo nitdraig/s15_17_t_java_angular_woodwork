@@ -1,27 +1,55 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaWifi, FaCoffee, FaSnowflake, FaUsers, FaLock, FaPlug, FaArrowLeft } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
+import { fetchWorkspaceById } from '../../services/Api';
+import { WorkspaceDetail } from '../../types/Types';
+import PaymentModal from './ModalPayment/PaymentModal';
+import DashboardFilter from '../../components/DashboardFilter';
+
 import Imagen1 from '../../assets/imgDashboard.png';
 import Imagen2 from '../../assets/imgDashboard.png';
 import Imagen3 from '../../assets/imgDashboard.png';
 import Imagen4 from '../../assets/imgDashboard.png';
-import PaymentModal from './ModalPayment/PaymentModal';
-import DashboardFilter from '../../components/DashboardFilter';
 
 const ReservationView = () => {
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const [peopleCount, setPeopleCount] = useState(4);
   const [startTime, setStartTime] = useState<Date | null>(new Date());
   const [endTime, setEndTime] = useState<Date | null>(new Date());
   const [selectedDay, setSelectedDay] = useState<Date | null>(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [workspace, setWorkspace] = useState<WorkspaceDetail | null>(null);
+  const [loading, setLoading] = useState(true);
   const pricePerHour = 5000;
-  const openDays = ["MONDAY"];
-  const openingTime = { hour: 9, minute: 0 };
-  const closingTime = { hour: 18, minute: 0 };
-  const capacity = 50;
+
+  useEffect(() => {
+    const loadWorkspace = async () => {
+      try {
+        if (id) {
+          const fetchedWorkspace = await fetchWorkspaceById(parseInt(id));
+          setWorkspace(fetchedWorkspace);
+        } else {
+          console.error("Invalid ID");
+        }
+      } catch (error) {
+        console.error("Failed to fetch workspace", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadWorkspace();
+  }, [id]);
+  
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!workspace) {
+    return <div>Workspace not found</div>;
+  }
 
   const services = [
     { name: 'Wifi', icon: <FaWifi className="text-xl text-zinc-700" /> },
@@ -31,6 +59,30 @@ const ReservationView = () => {
     { name: 'Tomacorrientes disponibles', icon: <FaPlug className="text-xl text-zinc-700" /> },
     { name: 'Espacio: Privado', icon: <FaLock className="text-xl text-zinc-700" /> }
   ];
+
+  const openDays = workspace.openDays || [];
+
+  type Time = {
+    hour: number;
+    minute: number;
+  };
+  
+  const openingTime: Time = { hour: 0, minute: 0 };
+  const closingTime: Time = { hour: 0, minute: 0 };
+
+  const getMinTime = (time: Time): Date => {
+    const date = new Date();
+    date.setHours(time.hour, time.minute, 0, 0);
+    return date;
+  };
+  
+  const getMaxTime = (time: Time): Date => {
+    const date = new Date();
+    date.setHours(time.hour, time.minute, 0, 0);
+    return date;
+  };
+
+  const capacity = workspace.capacity || 0;
 
   const handleGoBack = () => {
     navigate('/dashboard');
