@@ -5,11 +5,8 @@ import DashboardFilter from '../../components/DashboardFilter';
 const DashboardView = () => {
   return (
     <div className="dashboard-view">
-
       <DashboardFilter />
-
       <PlacesCard />
-
     </div>
   );
 }

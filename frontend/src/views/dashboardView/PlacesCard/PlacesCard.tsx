@@ -1,5 +1,5 @@
 import { cards } from "../../../services/cardData";
-import '../DashboardView.css'; // Importamos el CSS aquí
+import '../DashboardView.css';
 
 const PlacesCard = () => {
   const handleCardClick = (title: string) => {
