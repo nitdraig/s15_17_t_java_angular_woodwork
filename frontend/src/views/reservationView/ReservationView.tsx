@@ -169,7 +169,7 @@ const ReservationView = () => {
         </div>
 
         {/* CARD */}
-        <div className="w-full md:w-2/6 md:mt-20 flex flex-col h-5/6 space-y-8 py-12 px-8 md:mb-4 bg-[#323E1D] rounded-lg shadow-md">
+        <div className="w-full md:w-2/6 md:mt-20 flex flex-col h-5/6 space-y-8 py-12 px-8 mb-4 bg-[#323E1D] rounded-lg shadow-md">
           <img className="w-full h-44 mt-2 rounded-lg object-cover shadow-lg" src={Imagen4} alt="Small Image" />
           <button
             onClick={handleReserveClick}

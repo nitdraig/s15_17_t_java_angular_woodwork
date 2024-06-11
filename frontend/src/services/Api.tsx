@@ -6,6 +6,8 @@ import React, {
   useState,
 } from "react";
 import { UserI } from "../types/Types";
+import axios from "axios";
+import { Workspace } from '../types/Types';
 
 interface AuthContextType {
   token: string | null;
@@ -165,3 +167,17 @@ const useAuth = () => {
   return context;
 };
 export default useAuth;
+
+// Obtener workspaces.
+export const fetchWorkspaces = async (): Promise<Workspace[]> => {
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No token found");
+
+  const response = await axios.get(`${API_URL}/workspace/listOfWorkspaces`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};
