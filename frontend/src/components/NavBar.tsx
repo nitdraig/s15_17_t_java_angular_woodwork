@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../services/Api";
 import logo from "../assets/logo_nobac.png";
+
 export default function NavBar() {
   const { logout, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -17,7 +18,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="font-sans flex flex-col lg:h-20 sm:flex-row sm:justify-between py-4 px-6 lg:px-24 bg-white shadow sm:items-center w-full">
+    <nav className="font-sans flex flex-col lg:h-20 sm:flex-row sm:justify-between py-4 px-6 lg:px-24 bg-white shadow sm:items-center w-full overflow-hidden">
       <div className="flex justify-between items-center">
         <a href="/#">
           <img src={logo} className="lg:h-20 h-16" />
@@ -30,25 +31,25 @@ export default function NavBar() {
         </button>
       </div>
       <div
-        className={`sm:flex flex-col sm:flex-row sm:items-center space-x-4 sm:space-x-10 ${
+        className={`sm:flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 space-x-3 lg:space-x-10 ${
           isMenuOpen ? "block" : "hidden"
         } mt-4 sm:mt-0`}
       >
         <a
           href="/#about"
-          className="text-lg no-underline mt-2 sm:mt-0 ml-2 text-[#262626] hover:text-gray-800 font-bold transition duration-150 ease-in-out"
+          className="text-base md:text-lg no-underline text-[#262626] hover:text-gray-800 font-bold transition duration-150 ease-in-out"
         >
           Nosotros
         </a>
         <a
           href="/#faq"
-          className="text-lg lg:flex hidden  no-underline mt-2 sm:mt-0 ml-2 text-[#262626] hover:text-gray-800 font-bold transition duration-150 ease-in-out"
+          className="text-base md:text-lg lg:flex no-underline text-[#262626] hover:text-gray-800 font-bold transition duration-150 ease-in-out"
         >
           Preguntas
         </a>
         <a
           href="/#contact"
-          className="text-lg no-underline mt-2 sm:mt-0 ml-2 text-[#262626] hover:text-gray-800 font-bold transition duration-150 ease-in-out"
+          className="text-base md:text-lg no-underline text-[#262626] hover:text-gray-800 font-bold transition duration-150 ease-in-out"
         >
           Contáctanos
         </a>
@@ -56,16 +57,16 @@ export default function NavBar() {
           href="/login"
           className={`${
             !user ? "" : "hidden"
-          } mt-2 sm:mt-0 ml-4 w-32 hover:bg-[#556B2F] bg-[#8DB600] text-white py-2 px-6  text-center font-bold rounded-lg transition duration-150 ease-in-out`}
+          } mt-2 sm:mt-0 ml-4 w-32 hover:bg-[#556B2F] bg-[#8DB600] text-white py-2 px-6 text-center font-bold rounded-lg transition duration-150 ease-in-out`}
         >
           Ingresar
         </a>
-        <div className={`${user ? "" : "hidden"} relative`}>
+        <div className={`${user ? "" : "hidden"} relative mt-2 sm:mt-0`}>
           <button
             onClick={() => setDropdown(!dropdown)}
             id="dropdownUserAvatarButton"
             data-dropdown-toggle="dropdownAvatar"
-            className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
+            className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
             type="button"
           >
             <span className="sr-only">Open user menu</span>
@@ -73,10 +74,10 @@ export default function NavBar() {
               <img
                 src={user.profilePicture}
                 alt="Previsualización"
-                className="rounded-full w-full object-fit"
+                className="rounded-full w-8 h-8 object-cover"
               />
             ) : (
-              <div className="w-16 h-16 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center">
                 <div className="rounded-full w-full h-full bg-[#8DB600] text-white flex items-center justify-center text-3xl">
                   {user?.fullName.split(" ")[0].charAt(0)}
                   {user?.fullName.split(" ")[0].charAt(1)}
@@ -101,7 +102,7 @@ export default function NavBar() {
             >
               <li>
                 <Link
-                  className="block px-4 py-2  hover:bg-gray-100"
+                  className="block px-4 py-2 hover:bg-gray-100"
                   to={`/dashboard`}
                 >
                   Dashboard
