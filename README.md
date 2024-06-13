@@ -106,7 +106,13 @@ para encontrar, reservar y gestionar espacios de trabajo compartidos de manera e
   <tr>
     <td>Agustin</td>
     <td>Avellaneda</td>
-    <td>Project Manager/ Frontend</td>
+    <td>Project Manager/Frontend</td>
     <td><a href="https://portfolio.agustin.top" target="_blank">Ver Portfolio</a></td>
+  </tr>
+    <tr>
+    <td>Diego Raul</td>
+    <td>Barrionuevo</td>
+    <td>Programador Frontend</td>
+    <td><a href="https://github.com/kalchaqui" target="_blank">Ver Portfolio</a></td>
   </tr>
 </table>
