@@ -112,12 +112,12 @@ const Footer = () => {
         {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-3xl max-h-[96vh] overflow-y-auto">
-              <h2 className="text-2xl text-[#323E1D] font-bold mb-4">
-                Equipo No-Country s15-17-t-java-react
+              <h2 className="text-3xl text-[#323E1D] font-bold mb-4">
+                Equipo s15-17-t-java-react
               </h2>
               <div className="grid grid-cols-2 gap-4">
                 {teamMembers.map((member) => (
-                  <div className="flex items-center p-2 border rounded-lg">
+                  <div className="flex bg-zinc-200 items-center p-2 border rounded-lg">
                   <img
                     src={member.avatar || 'https://via.placeholder.com/150'}
                     alt={`${member.name}'s avatar`}
