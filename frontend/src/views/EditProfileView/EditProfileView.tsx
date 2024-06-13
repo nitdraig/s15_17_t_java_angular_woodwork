@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import Spinner from "../../components/Spinner";
 import { UserI } from "../../types/Types";
+import profileImage from '../../assets/woodwork.jpg'; // Asegúrate de que la ruta es correcta
 
 const EditProfileView = () => {
   const { id } = useParams();
@@ -12,8 +13,8 @@ const EditProfileView = () => {
   const initialData: UserI = {
     id_user: 1,
     email: "franco99@gmail.com",
-    fullName: "Franco Lacourt",
-    profilePicture: "",
+    fullName: "Agustín Avellaneda",
+    profilePicture: profileImage,
   };
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -21,9 +22,9 @@ const EditProfileView = () => {
   const [user, setUser] = useState<UserI>(initialData);
   const [hasChanged, setHasChanged] = useState<boolean>(false);
   const [alertIsHidden, setAlertIsHidden] = useState<boolean>(true);
-
-  const [selectedFile, setSelectedFile] = useState<File>();
   const [previewURL, setPreviewURL] = useState<string>("");
+
+  console.log("Profile Image URL:", profileImage);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,27 +72,18 @@ const EditProfileView = () => {
     setHasChanged(dataHasChanged);
   }, [user]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUser((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange(e);
-
-    const file: File | any = e.target.files?.[0];
-    setSelectedFile(file);
-    console.log(selectedFile);
-
+    const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         setPreviewURL(reader.result as string);
       };
       reader.readAsDataURL(file);
+      setUser((prevState) => ({
+        ...prevState,
+        profilePicture: URL.createObjectURL(file), // Aquí actualizamos el perfil del usuario con la URL del archivo seleccionado
+      }));
     } else {
       setPreviewURL("");
     }
@@ -99,7 +91,6 @@ const EditProfileView = () => {
 
   const reestablecer = () => {
     setPreviewURL("");
-    setSelectedFile(undefined);
     setUser(initialData);
   };
 
@@ -112,77 +103,82 @@ const EditProfileView = () => {
   }
 
   return (
-    <div className="my-8 mx-24 relative h-screen">
-      <div className="flex flex-col gap-y-10">
-        <h2 className="text-4xl font-bold">Edición de perfil</h2>
-        <div className="w-1/2 flex items-center gap-x-8">
-          <div className="group relative w-28 h-28 rounded-full bg-white flex items-center justify-center hover:cursor-pointer">
-            {previewURL ? (
-              <img
-                src={previewURL}
-                alt="Previsualización"
-                className="rounded-full w-full object-fit"
-              />
-            ) : (
-              <div className="w-28 h-28 rounded-full flex items-center justify-center">
-                <div className="rounded-full w-full h-full bg-[#8DB600] text-white flex items-center justify-center text-5xl">
-                  {user?.fullName.split(" ")[0].charAt(0)}
-                  {user?.fullName.split(" ")[0].charAt(1)}
-                </div>
-              </div>
-            )}
-            <label
-              htmlFor="fileInput"
-              className="absolute hidden bg-black/50 w-full h-full rounded-full gap-x-1 text-3xl group-hover:flex group-hover:items-center group-hover:justify-center hover:cursor-pointer text-white"
-            >
-              <input
-                name="profilePicture"
-                id="fileInput"
-                type="file"
-                onChange={handleFileChange}
-                accept="image/*"
-                className="hidden"
-              />
-              <FiEdit />
-            </label>
-            {previewURL ? (
-              <div
-                onClick={() => {
-                  reestablecer();
-                }}
-                className="absolute bg-red-700 p-1 rounded-full z-30 top-0 right-0 text-sm text-white"
+    <div className="relative max-w-md mx-auto md:max-w-2xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-16">
+      <div className="px-6">
+        <div className="flex flex-wrap justify-center">
+          <div className="w-full flex justify-center">
+            <div className="relative mt-8">
+              {previewURL ? (
+                <img
+                  src={previewURL}
+                  alt="Previsualización"
+                  className="shadow-xl rounded-full align-middle border-none max-w-[150px]"
+                />
+              ) : (
+                <img
+                  src={user.profilePicture}
+                  alt="Profile"
+                  className="shadow-xl rounded-full align-middle border-none max-w-[150px]"
+                />
+              )}
+              <label
+                htmlFor="fileInput"
+                className="absolute hidden bg-black/50 w-full h-full rounded-full gap-x-1 text-3xl group-hover:flex group-hover:items-center group-hover:justify-center hover:cursor-pointer text-white"
               >
-                <AiOutlineClose />
-              </div>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="flex flex-col gap-y-3">
-            <input
-              type="text"
-              name="fullName"
-              value={user?.fullName}
-              onChange={handleChange}
-              placeholder="Name"
-              className="text-xl font-bold rounded-sm focus:border-none block w-full active:border-none"
-            />
-            <span>{user?.email}</span>
+                <input
+                  name="profilePicture"
+                  id="fileInput"
+                  type="file"
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  className="hidden"
+                />
+                <FiEdit />
+              </label>
+              {previewURL && (
+                <div
+                  onClick={() => {
+                    reestablecer();
+                  }}
+                  className="absolute bg-red-700 p-1 rounded-full z-30 top-0 right-0 text-sm text-white"
+                >
+                  <AiOutlineClose />
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        <h2 className="text-4xl font-bold mt-6">Contraseña y autenticación</h2>
-        <button
-          className="w-fit px-3 py-1.5 rounded-md bg-[#8DB600] font-bold text-white"
-          onClick={() => setAlertIsHidden(false)}
-        >
-          Cambiar contraseña
-        </button>
+        <div className="text-center mt-20">
+          <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
+            {user?.fullName}
+          </h3>
+          <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
+            <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
+            Buenos Aires, Argentina
+          </div>
+        </div>
+        <div className="mt-6 py-6 border-t border-slate-200 text-center">
+          <div className="flex flex-wrap justify-center">
+            <div className="w-full px-4">
+              <p className="font-light leading-relaxed text-slate-600 mb-4">
+                Me llamo Agustín, soy viajero, desarrollador tiempo completo, 
+                gracias a Woodwork puedo armar grupos de trabajo en lugares especialmente tranquilos para la concentración y el desarrollo de proyectos.
+              </p>
+              <a
+                href="javascript:;"
+                className="font-normal text-slate-700 hover:text-slate-400"
+              >
+                Cambiar contraseña
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div
         className={`${
           hasChanged ? "flex" : "hidden"
-        } fixed z-50 bottom-10 left-1/2 -translate-x-1/2 w-3/4 flex items-center justify-between p-4 bg-white text-black rounded-xl border border-black`}
+        } fixed z-50 bottom-10 left-1/2 -translate-x-1/2 w-3/4 flex items-center justify-between p-4 bg-black text-black rounded-xl border border-black`}
       >
         <span className="font-bold text-xl">
           Cuidado, ¡tienes cambios sin guardar!
@@ -215,19 +211,9 @@ const EditProfileView = () => {
           </h2>
         </div>
         <div className="flex flex-col items-start w-full gap-y-4 mt-6">
-          {/* <div className='flex flex-col w-full gap-y-2'>
-            <label className='text-xs text-slate-800 font-bold' htmlFor="">CONTRASEÑA ACTUAL</label>
-            <input type="text" />
-          </div> */}
           <div className="flex flex-col w-full gap-y-2">
             <label className="text-xs text-slate-800 font-bold" htmlFor="">
               NUEVA CONTRASEÑA
-            </label>
-            <input type="text" />
-          </div>
-          <div className="flex flex-col w-full gap-y-2">
-            <label className="text-xs text-slate-800 font-bold" htmlFor="">
-              CONFIRMAR NUEVA CONTRASEÑA
             </label>
             <input type="text" />
           </div>
