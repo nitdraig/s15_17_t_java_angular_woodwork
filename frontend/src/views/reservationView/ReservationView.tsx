@@ -118,17 +118,18 @@ const ReservationView = () => {
       className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 duration-300 cursor-pointer"
       src={workspace.mainImage}
       alt={workspace.workspaceName}
+      style={{ height: '33rem' }}
     />
   </div>
   <div className="w-full md:w-4/12 flex flex-col justify-between space-y-4 px-4">
     <img
-      className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 duration-300 cursor-pointer"
-      src={workspace.mainImage}
+      className="w-full h-32 md:h-64 rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 duration-300 cursor-pointer"
+      src={workspace.workspaceImages[0]}
       alt={workspace.workspaceName}
     />
     <img
-      className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 duration-300 cursor-pointer"
-      src={workspace.mainImage}
+      className="w-full h-32 md:h-64 rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 duration-300 cursor-pointer"
+      src={workspace.workspaceImages[1]}
       alt={workspace.workspaceName}
     />
   </div>
