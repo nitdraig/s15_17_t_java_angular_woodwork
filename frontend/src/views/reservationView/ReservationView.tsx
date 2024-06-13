@@ -251,7 +251,7 @@ const ReservationView = () => {
             </div>
             <div className="flex justify-between">
               <span className="font-semibold text-white">Precio por Hora x Persona:</span>
-              <span className="text-white">${pricePerHour}</span>
+              <span className="text-white">${workspace.pricePerHour}</span>
             </div>
             <hr className="border-t border-white my-4" />
             <div className="flex justify-between">
