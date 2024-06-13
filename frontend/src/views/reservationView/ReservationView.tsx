@@ -7,6 +7,7 @@ import { fetchWorkspaceById } from '../../services/Api';
 import { WorkspaceDetail } from '../../types/Types';
 import PaymentModal from './ModalPayment/PaymentModal';
 import DashboardFilter from '../../components/DashboardFilter';
+import Spinner from '../../components/Spinner';
 
 const ReservationView = () => {
   const navigate = useNavigate();
@@ -18,7 +19,6 @@ const ReservationView = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [workspace, setWorkspace] = useState<WorkspaceDetail | null>(null);
   const [loading, setLoading] = useState(true);
-  const pricePerHour = 5000;
 
   useEffect(() => {
     const loadWorkspace = async () => {
@@ -39,7 +39,11 @@ const ReservationView = () => {
   }, [id]);
   
   if (loading) {
-    return <div className='h-screen'>Loading...</div>;
+    return (
+      <div className="fixed inset-0 flex items-center justify-center w-screen h-screen bg-white z-50">
+        <Spinner />
+      </div>
+    );
   }
 
   if (!workspace) {
@@ -270,7 +274,7 @@ const ReservationView = () => {
             <div className="flex justify-between">
               <span className="font-semibold text-white">Total:</span>
               <span className="text-white">
-                {startTime && endTime ? `$${(endTime.getHours() - startTime.getHours()) * pricePerHour * peopleCount}` : 'No disponible'}
+                {startTime && endTime ? `$${(endTime.getHours() - startTime.getHours()) * workspace.pricePerHour * peopleCount}` : 'No disponible'}
               </span>
             </div>
           </div>
@@ -306,7 +310,7 @@ const ReservationView = () => {
         startTime={startTime!}
         endTime={endTime!}
         selectedDay={selectedDay!}
-        pricePerHour={pricePerHour}
+        pricePerHour={workspace.pricePerHour}
       />
     </>
   );

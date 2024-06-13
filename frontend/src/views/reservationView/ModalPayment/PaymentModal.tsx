@@ -12,10 +12,10 @@ const PaymentModal: FC<PaymentModalProps> = ({ isOpen, onClose, peopleCount, sta
     cvc: '',
   });
   const [errors, setErrors] = useState({
-    cardHolder: false,
-    cardNumber: false,
-    expirationDate: false,
-    cvc: false,
+    cardHolder: '',
+    cardNumber: '',
+    expirationDate: '',
+    cvc: '',
   });
 
   if (!isOpen) return null;
@@ -33,24 +33,56 @@ const PaymentModal: FC<PaymentModalProps> = ({ isOpen, onClose, peopleCount, sta
     });
     setErrors({
       ...errors,
-      [name]: false,
+      [name]: '',
     });
   };
 
-  const handleSubmit = () => {
+  const validateForm = () => {
     const newErrors = {
-      cardHolder: form.cardHolder === '',
-      cardNumber: form.cardNumber === '',
-      expirationDate: form.expirationDate === '',
-      cvc: form.cvc === '',
+      cardHolder: '',
+      cardNumber: '',
+      expirationDate: '',
+      cvc: '',
     };
+
+    // Validar nombre del titular
+    if (!/^[a-zA-Z\s]+$/.test(form.cardHolder)) {
+      newErrors.cardHolder = 'El nombre del titular solo debe contener letras.';
+    }
+
+    // Validar número de tarjeta
+    if (!/^\d{16}$/.test(form.cardNumber)) {
+      newErrors.cardNumber = 'El número de tarjeta debe contener 16 dígitos.';
+    }
+
+    // Validar fecha de vencimiento
+    const [month, year] = form.expirationDate.split('/');
+    const currentYear = new Date().getFullYear() % 100; // Obtener los dos últimos dígitos del año actual
+    const currentMonth = new Date().getMonth() + 1;
+    const expYear = parseInt(year, 10);
+    const expMonth = parseInt(month, 10);
+
+    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(form.expirationDate)) {
+      newErrors.expirationDate = 'La fecha de vencimiento debe estar en formato MM/AA.';
+    } else if (expYear < currentYear || (expYear === currentYear && expMonth < currentMonth)) {
+      newErrors.expirationDate = 'La fecha de vencimiento no puede ser anterior a la fecha actual.';
+    } else if (expYear > currentYear + 6 || (expYear === currentYear + 6 && expMonth > currentMonth)) {
+      newErrors.expirationDate = 'La fecha de vencimiento no puede ser superior a 6 años desde la fecha actual.';
+    }
+
+    // Validar CVC
+    if (!/^\d{3}$/.test(form.cvc)) {
+      newErrors.cvc = 'El CVC debe contener 3 dígitos numéricos.';
+    }
 
     setErrors(newErrors);
 
-    const hasErrors = Object.values(newErrors).some(error => error);
+    return Object.values(newErrors).every(error => error === '');
+  };
 
-    if (hasErrors) {
-      toast.error("Por favor, complete todos los campos obligatorios.", {
+  const handleSubmit = () => {
+    if (!validateForm()) {
+      toast.error("Por favor, corrija los errores en el formulario.", {
         position: "top-center",
         autoClose: 3000,
       });
@@ -91,7 +123,7 @@ const PaymentModal: FC<PaymentModalProps> = ({ isOpen, onClose, peopleCount, sta
                   className={`w-full px-3 py-2 border rounded-lg ${errors.cardHolder ? 'border-red-500' : ''}`}
                   placeholder="Nombre del titular"
                 />
-                {errors.cardHolder && <p className="text-red-500 text-sm">*Este campo es requerido</p>}
+                {errors.cardHolder && <p className="text-red-500 text-sm">{errors.cardHolder}</p>}
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700">Número de tarjeta</label>
@@ -103,7 +135,7 @@ const PaymentModal: FC<PaymentModalProps> = ({ isOpen, onClose, peopleCount, sta
                   className={`w-full px-3 py-2 border rounded-lg ${errors.cardNumber ? 'border-red-500' : ''}`}
                   placeholder="1234 5678 9012 3456"
                 />
-                {errors.cardNumber && <p className="text-red-500 text-sm">*Este campo es requerido</p>}
+                {errors.cardNumber && <p className="text-red-500 text-sm">{errors.cardNumber}</p>}
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700">Fecha de vencimiento</label>
@@ -115,7 +147,7 @@ const PaymentModal: FC<PaymentModalProps> = ({ isOpen, onClose, peopleCount, sta
                   className={`w-full px-3 py-2 border rounded-lg ${errors.expirationDate ? 'border-red-500' : ''}`}
                   placeholder="MM/AA"
                 />
-                {errors.expirationDate && <p className="text-red-500 text-sm">*Este campo es requerido</p>}
+                {errors.expirationDate && <p className="text-red-500 text-sm">{errors.expirationDate}</p>}
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700">CVC</label>
@@ -127,7 +159,7 @@ const PaymentModal: FC<PaymentModalProps> = ({ isOpen, onClose, peopleCount, sta
                   className={`w-full px-3 py-2 border rounded-lg ${errors.cvc ? 'border-red-500' : ''}`}
                   placeholder="123"
                 />
-                {errors.cvc && <p className="text-red-500 text-sm">*Este campo es requerido</p>}
+                {errors.cvc && <p className="text-red-500 text-sm">{errors.cvc}</p>}
               </div>
             </div>
             <div className='space-y-6'>
