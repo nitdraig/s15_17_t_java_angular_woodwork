@@ -47,12 +47,12 @@ const ReservationView = () => {
   }
 
   const services = [
-    { name: 'Wifi', icon: <FaWifi className="text-xl text-zinc-700" /> },
-    { name: 'Café', icon: <FaCoffee className="text-xl text-zinc-700" /> },
-    { name: 'Aire acondicionado', icon: <FaSnowflake className="text-xl text-zinc-700" /> },
-    { name: 'Espacio: Público', icon: <FaUsers className="text-xl text-zinc-700" /> },
-    { name: 'Tomacorrientes disponibles', icon: <FaPlug className="text-xl text-zinc-700" /> },
-    { name: 'Espacio: Privado', icon: <FaLock className="text-xl text-zinc-700" /> }
+    { name: 'Wifi', icon: <FaWifi className="text-xl text-[#8DB600]" /> },
+    { name: 'Café', icon: <FaCoffee className="text-xl text-[#8DB600]" /> },
+    { name: 'Aire acondicionado', icon: <FaSnowflake className="text-xl text-[#8DB600]" /> },
+    { name: 'Espacio: Público', icon: <FaUsers className="text-xl text-[#8DB600]" /> },
+    { name: 'Tomacorrientes disponibles', icon: <FaPlug className="text-xl text-[#8DB600]" /> },
+    { name: 'Espacio: Privado', icon: <FaLock className="text-xl text-[#8DB600]" /> }
   ];
 
   const openDays = workspace.openDays || [];
@@ -269,9 +269,9 @@ const ReservationView = () => {
         <h2 className="text-zinc-900 text-center md:text-left text-3xl md:text-4xl font-bold font-sans tracking-wider mb-6 md:mb-4">Servicios Disponibles</h2>
         <div className="grid grid-cols-2 gap-4 ">
           {services.map((service, index) => (
-            <div key={index} className="flex items-center space-x-2">
+            <div key={index} className="flex items-center space-x-2 ">
               {service.icon}
-              <span className="text-zinc-700 text-xl">{service.name}</span>
+              <span className="text-[zinc-700] text-xl">{service.name}</span>
             </div>
           ))}
         </div>
