@@ -225,7 +225,7 @@ const ReservationView = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center z-0">
               <DatePicker
                 selected={selectedDay}
                 onChange={(date) => setSelectedDay(date)}
