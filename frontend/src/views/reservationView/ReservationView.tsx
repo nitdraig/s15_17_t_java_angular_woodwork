@@ -107,28 +107,29 @@ const ReservationView = () => {
       {workspace.workspaceName}
       </div>
 
-      {/* IMAGES SECTION */}
-      <div className="flex flex-col md:flex-row px-4 md:px-16 mb-8">
-        <div className="w-full md:w-9/12 flex items-stretch px-4 pr-0 md:pr-5 mb-4 md:mb-0">
-          <img
-            className="rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
-            src={workspace.mainImage}
-            alt={workspace.workspaceName}
-          />
-        </div>
-        <div className="w-full md:w-5/12 flex flex-col justify-between space-y-4">
-          <img
-            className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
-            src={workspace.mainImage}
-            alt={workspace.workspaceName}
-          />
-          <img
-            className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
-            src={workspace.mainImage}
-            alt={workspace.workspaceName}
-          />
-        </div>
-      </div>
+{/* IMAGES SECTION */}
+<div className="flex flex-col md:flex-row px-4 md:px-12 mb-8">
+  <div className="w-full md:w-8/12 flex items-stretch px-4 mb-4 md:mb-0">
+    <img
+      className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
+      src={workspace.mainImage}
+      alt={workspace.workspaceName}
+    />
+  </div>
+  <div className="w-full md:w-4/12 flex flex-col justify-between space-y-4 px-4">
+    <img
+      className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
+      src={workspace.mainImage}
+      alt={workspace.workspaceName}
+    />
+    <img
+      className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
+      src={workspace.mainImage}
+      alt={workspace.workspaceName}
+    />
+  </div>
+</div>
+
 
       <div className="flex flex-col md:flex-row px-4 md:px-16">
         <div className="w-full md:w-4/6 p-4 md:p-8 md:pl-0">
