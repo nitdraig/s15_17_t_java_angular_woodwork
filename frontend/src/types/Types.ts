@@ -1,14 +1,13 @@
-
 export interface IRegisterFormInput {
-    fullName: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }
+  fullName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 export interface ILoginFormInput {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
 export interface PaymentModalProps {
@@ -51,7 +50,16 @@ export interface FormattedWorkspace {
   description: string;
   price: string;
 }
-
+export interface FormattedWorkspace2 {
+  id_workspace: number;
+  title: string;
+  image: string;
+  tag: string;
+  rating: string;
+  description: string;
+  price: string;
+  reservationDate: Date;
+}
 export interface WorkspaceDetail extends Workspace {
   // Campo adicional.
 }
@@ -65,5 +73,3 @@ export interface PaymentModalProps {
   selectedDay: Date;
   pricePerHour: number;
 }
-
-

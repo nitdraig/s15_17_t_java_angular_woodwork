@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../services/Api";
 import logo from "../assets/logo_nobac.png";
-
+import profileImage from "../assets/Profile.png";
 export default function NavBar() {
   const { logout, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -70,20 +70,12 @@ export default function NavBar() {
             type="button"
           >
             <span className="sr-only">Open user menu</span>
-            {user?.profilePicture ? (
-              <img
-                src={user.profilePicture}
-                alt="Previsualización"
-                className="rounded-full w-full object-fit"
-              />
-            ) : (
-              <div className="w-16 h-16 rounded-full flex items-center justify-center">
-                <div className="rounded-full w-full h-full bg-[#8DB600] text-white flex items-center justify-center text-3xl">
-                  {user?.fullName.split(" ")[0].charAt(0)}
-                  {user?.fullName.split(" ")[0].charAt(1)}
-                </div>
-              </div>
-            )}
+
+            <img
+              src={profileImage}
+              alt="Previsualización"
+              className=" object-fit w-14 h-14 align-middle border-lg rounded-full border border-[#8DB600] hover:border-[#5a682b] flex items-center justify-center"
+            />
           </button>
 
           <div
