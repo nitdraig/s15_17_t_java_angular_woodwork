@@ -39,7 +39,7 @@ const ReservationView = () => {
   }, [id]);
   
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='h-screen'>Loading...</div>;
   }
 
   if (!workspace) {
@@ -109,12 +109,24 @@ const ReservationView = () => {
 
       {/* IMAGES SECTION */}
       <div className="flex flex-col md:flex-row px-4 md:px-16 mb-8">
-        <div className="w-full md:w-4/6 flex items-stretch pr-0 md:pr-5 mb-4 md:mb-0">
-          <img className="w-full rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt={workspace.workspaceName} />
+        <div className="w-full md:w-9/12 flex items-stretch px-4 pr-0 md:pr-5 mb-4 md:mb-0">
+          <img
+            className="rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
+            src={workspace.mainImage}
+            alt={workspace.workspaceName}
+          />
         </div>
-        <div className="w-full md:w-2/6 flex flex-col justify-between space-y-4">
-          <img className="w-full rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt={workspace.workspaceName} />
-          <img className="w-full rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt={workspace.workspaceName} />
+        <div className="w-full md:w-5/12 flex flex-col justify-between space-y-4">
+          <img
+            className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
+            src={workspace.mainImage}
+            alt={workspace.workspaceName}
+          />
+          <img
+            className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 cursor-pointer"
+            src={workspace.mainImage}
+            alt={workspace.workspaceName}
+          />
         </div>
       </div>
 
@@ -221,7 +233,7 @@ const ReservationView = () => {
 
         {/* CARD */}
         <div className="w-full md:w-2/6 md:mt-20 flex flex-col h-5/6 space-y-8 py-12 px-8 mb-4 bg-[#323E1D] rounded-lg shadow-md">
-          <img className="w-full h-44 mt-2 rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt="Small Image" />
+          <img className="w-full h-44 mt-2 rounded-lg object-cover transition-transform transform hover:scale-105 cursor-pointer shadow-lg" src={workspace.mainImage} alt="Small Image" />
           <button
             onClick={handleReserveClick}
             className="w-full bg-[#F9EC34] hover:bg-[#A67C52] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#31543D] font-medium rounded-lg text-sm md:text-lg px-5 py-2.5 text-center shadow-md hover:shadow-lg transition duration-150 ease-in-out"
