@@ -7,6 +7,7 @@ import { fetchWorkspaceById } from '../../services/Api';
 import { WorkspaceDetail } from '../../types/Types';
 import PaymentModal from './ModalPayment/PaymentModal';
 import DashboardFilter from '../../components/DashboardFilter';
+import Spinner from '../../components/Spinner';
 
 const ReservationView = () => {
   const navigate = useNavigate();
@@ -18,7 +19,6 @@ const ReservationView = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [workspace, setWorkspace] = useState<WorkspaceDetail | null>(null);
   const [loading, setLoading] = useState(true);
-  const pricePerHour = 5000;
 
   useEffect(() => {
     const loadWorkspace = async () => {
@@ -39,7 +39,11 @@ const ReservationView = () => {
   }, [id]);
   
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="fixed inset-0 flex items-center justify-center w-screen h-screen bg-white z-50">
+        <Spinner />
+      </div>
+    );
   }
 
   if (!workspace) {
@@ -47,12 +51,12 @@ const ReservationView = () => {
   }
 
   const services = [
-    { name: 'Wifi', icon: <FaWifi className="text-xl text-zinc-700" /> },
-    { name: 'Café', icon: <FaCoffee className="text-xl text-zinc-700" /> },
-    { name: 'Aire acondicionado', icon: <FaSnowflake className="text-xl text-zinc-700" /> },
-    { name: 'Espacio: Público', icon: <FaUsers className="text-xl text-zinc-700" /> },
-    { name: 'Tomacorrientes disponibles', icon: <FaPlug className="text-xl text-zinc-700" /> },
-    { name: 'Espacio: Privado', icon: <FaLock className="text-xl text-zinc-700" /> }
+    { name: 'Wifi', icon: <FaWifi className="text-xl text-[#8DB600]" /> },
+    { name: 'Café', icon: <FaCoffee className="text-xl text-[#8DB600]" /> },
+    { name: 'Aire acondicionado', icon: <FaSnowflake className="text-xl text-[#8DB600]" /> },
+    { name: 'Espacio: Público', icon: <FaUsers className="text-xl text-[#8DB600]" /> },
+    { name: 'Tomacorrientes disponibles', icon: <FaPlug className="text-xl text-[#8DB600]" /> },
+    { name: 'Espacio: Privado', icon: <FaLock className="text-xl text-[#8DB600]" /> }
   ];
 
   const openDays = workspace.openDays || [];
@@ -107,16 +111,29 @@ const ReservationView = () => {
       {workspace.workspaceName}
       </div>
 
-      {/* IMAGES SECTION */}
-      <div className="flex flex-col md:flex-row px-4 md:px-16 mb-8">
-        <div className="w-full md:w-4/6 flex items-stretch pr-0 md:pr-5 mb-4 md:mb-0">
-          <img className="w-full rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt={workspace.workspaceName} />
-        </div>
-        <div className="w-full md:w-2/6 flex flex-col justify-between space-y-4">
-          <img className="w-full rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt={workspace.workspaceName} />
-          <img className="w-full rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt={workspace.workspaceName} />
-        </div>
-      </div>
+{/* IMAGES SECTION */}
+<div className="flex flex-col md:flex-row px-4 md:px-12 mb-8">
+  <div className="w-full md:w-8/12 flex items-stretch px-4 mb-4 md:mb-0">
+    <img
+      className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 duration-300 cursor-pointer"
+      src={workspace.mainImage}
+      alt={workspace.workspaceName}
+    />
+  </div>
+  <div className="w-full md:w-4/12 flex flex-col justify-between space-y-4 px-4">
+    <img
+      className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 duration-300 cursor-pointer"
+      src={workspace.mainImage}
+      alt={workspace.workspaceName}
+    />
+    <img
+      className="w-full rounded-lg object-cover shadow-lg transition-transform transform hover:scale-105 duration-300 cursor-pointer"
+      src={workspace.mainImage}
+      alt={workspace.workspaceName}
+    />
+  </div>
+</div>
+
 
       <div className="flex flex-col md:flex-row px-4 md:px-16">
         <div className="w-full md:w-4/6 p-4 md:p-8 md:pl-0">
@@ -208,7 +225,7 @@ const ReservationView = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center z-0">
               <DatePicker
                 selected={selectedDay}
                 onChange={(date) => setSelectedDay(date)}
@@ -221,7 +238,7 @@ const ReservationView = () => {
 
         {/* CARD */}
         <div className="w-full md:w-2/6 md:mt-20 flex flex-col h-5/6 space-y-8 py-12 px-8 mb-4 bg-[#323E1D] rounded-lg shadow-md">
-          <img className="w-full h-44 mt-2 rounded-lg object-cover shadow-lg" src={workspace.mainImage} alt="Small Image" />
+          <img className="w-full h-44 mt-2 rounded-lg object-cover transition-transform transform hover:scale-105 cursor-pointer shadow-lg" src={workspace.mainImage} alt="Small Image" />
           <button
             onClick={handleReserveClick}
             className="w-full bg-[#F9EC34] hover:bg-[#A67C52] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#31543D] font-medium rounded-lg text-sm md:text-lg px-5 py-2.5 text-center shadow-md hover:shadow-lg transition duration-150 ease-in-out"
@@ -251,13 +268,13 @@ const ReservationView = () => {
             </div>
             <div className="flex justify-between">
               <span className="font-semibold text-white">Precio por Hora x Persona:</span>
-              <span className="text-white">${pricePerHour}</span>
+              <span className="text-white">${workspace.pricePerHour}</span>
             </div>
             <hr className="border-t border-white my-4" />
             <div className="flex justify-between">
               <span className="font-semibold text-white">Total:</span>
               <span className="text-white">
-                {startTime && endTime ? `$${(endTime.getHours() - startTime.getHours()) * pricePerHour * peopleCount}` : 'No disponible'}
+                {startTime && endTime ? `$${(endTime.getHours() - startTime.getHours()) * workspace.pricePerHour * peopleCount}` : 'No disponible'}
               </span>
             </div>
           </div>
@@ -269,9 +286,9 @@ const ReservationView = () => {
         <h2 className="text-zinc-900 text-center md:text-left text-3xl md:text-4xl font-bold font-sans tracking-wider mb-6 md:mb-4">Servicios Disponibles</h2>
         <div className="grid grid-cols-2 gap-4 ">
           {services.map((service, index) => (
-            <div key={index} className="flex items-center space-x-2">
+            <div key={index} className="flex items-center space-x-2 ">
               {service.icon}
-              <span className="text-zinc-700 text-xl">{service.name}</span>
+              <span className="text-[zinc-700] text-xl">{service.name}</span>
             </div>
           ))}
         </div>
@@ -293,7 +310,7 @@ const ReservationView = () => {
         startTime={startTime!}
         endTime={endTime!}
         selectedDay={selectedDay!}
-        pricePerHour={pricePerHour}
+        pricePerHour={workspace.pricePerHour}
       />
     </>
   );

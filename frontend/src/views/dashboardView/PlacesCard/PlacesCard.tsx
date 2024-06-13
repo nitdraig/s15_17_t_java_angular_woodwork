@@ -20,10 +20,11 @@ const PlacesCard: React.FC<PlacesCardProps> = ({ workspaces }) => {
         <Link to={`/reservation/${workspace.id_workspace}`} key={index} className="card">
           <img src={workspace.image} alt={workspace.title} className="card-image" />
           <div className="card-content">
-            <div className="flex">
+            <div className="flex justify-between items-center">
               <span className="tag w-auto ml-0 mr-auto px-2">{workspace.tag}</span>
-              <div className="ml-12">
-                🌟 {getRandomRating()}
+              <div className="rating-container flex items-center ml-4">
+                <span role="img" aria-label="star">🌟</span>
+                <span className="rating ml-1">{getRandomRating()}</span>
               </div>
             </div>
             <h3 className="title">{workspace.title}</h3>
