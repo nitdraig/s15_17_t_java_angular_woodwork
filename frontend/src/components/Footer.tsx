@@ -91,13 +91,13 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#8DB600] py-5 -mb-8 w-full">
+    <footer className="bg-[#8DB600] py-5 -mb-8 w-full overflow-hidden">
       <div className="mt-8 text-center lg:mx-auto mx-5">
         <p className="text-black font-semibold">
           2024 &copy; WoodWork. Todos los derechos reservados.
         </p>
         <p
-          className="text-black font-thin"
+          className="text-black font-thin hover:scale-110 transition-transform duration-300"
           style={{
             textShadow:
               '1px 1px 2px #303030, 0 0 1em #303030, 0 0 0.2em #303030',
